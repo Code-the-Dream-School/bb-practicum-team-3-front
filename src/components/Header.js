@@ -9,27 +9,12 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
-
-const navItems = [
-  {
-    id: 1,
-    name: 'LOGIN',
-    path: '/signin',
-  },
-  {
-    id: 2,
-    name: 'SIGN UP',
-    path: '/signup',
-  },
-];
 
 const Header = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
   const theme = useTheme();
-  console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
   console.log(isMatch);
 
@@ -54,6 +39,7 @@ const Header = () => {
                 }}
                 onClick={() => setOpenMobileMenu(true)}
               />
+
               <Drawer
                 anchor="left"
                 open={openMobileMenu}
@@ -84,27 +70,20 @@ const Header = () => {
                       gap: 3,
                     }}
                   >
-                    {navItems.map((navItem) => (
-                      <Link
-                        href={navItem.path}
-                        key={navItem.id}
-                        underline="none"
-                        color="#fff"
-                        sx={{
-                          fontWeight: '300',
-                          fontSize: '14px',
-                          opacity: 0.7,
-                          '&:hover': {
-                            opacity: 1,
-                          },
-                          '&:first-of-type': {
-                            opacity: 1,
-                          },
-                        }}
-                      >
-                        {navItem.name}
-                      </Link>
-                    ))}
+                    <Button
+                      sx={{ marginLeft: 'auto' }}
+                      variant="text"
+                      href="/signin"
+                    >
+                      LOGIN
+                    </Button>
+                    <Button
+                      sx={{ marginLeft: '10px' }}
+                      variant="text"
+                      href="/signup"
+                    >
+                      SIGN UP
+                    </Button>
                   </Box>
                   <Typography
                     sx={{
@@ -127,14 +106,14 @@ const Header = () => {
               <Button
                 sx={{ marginLeft: 'auto' }}
                 variant="contained"
-                href="/signIn"
+                href="/signin"
               >
                 LOGIN
               </Button>
               <Button
                 sx={{ marginLeft: '10px' }}
                 variant="contained"
-                href="/signUp"
+                href="/signup"
               >
                 SIGN UP
               </Button>
