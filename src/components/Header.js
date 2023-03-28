@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link as ReactRouterLink } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
   Box,
@@ -8,12 +10,24 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  Link,
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 
-const Header = () => {
+const navItems = [
+  {
+    id: 1,
+    name: 'LOGIN',
+    path: '/signin',
+  },
+  {
+    id: 2,
+    name: 'SIGN UP',
+    path: '/signup',
+  },
+];
+
+export default function Header() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
-
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
   console.log(isMatch);
@@ -49,14 +63,13 @@ const Header = () => {
                   sx={{
                     position: 'relative',
                     width: 250,
-                    backgroundColor: '#5243C2',
+                    backgroundColor: '#2461a6',
                     height: '100%',
                     py: 3,
                     px: 1,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: 5,
                   }}
                   role="presentation"
                   onClick={() => setOpenMobileMenu(false)}
@@ -70,20 +83,21 @@ const Header = () => {
                       gap: 3,
                     }}
                   >
-                    <Button
-                      sx={{ marginLeft: 'auto' }}
-                      variant="text"
-                      href="/signin"
-                    >
-                      LOGIN
-                    </Button>
-                    <Button
-                      sx={{ marginLeft: '10px' }}
-                      variant="text"
-                      href="/signup"
-                    >
-                      SIGN UP
-                    </Button>
+                    {navItems.map((navItem) => (
+                      <Link
+                        component={ReactRouterLink}
+                        to={navItem.path}
+                        key={navItem.id}
+                        underline="none"
+                        color="#fff"
+                        sx={{
+                          fontWeight: '500',
+                          fontSize: '20px',
+                        }}
+                      >
+                        {navItem.name}
+                      </Link>
+                    ))}
                   </Box>
                   <Typography
                     sx={{
@@ -104,16 +118,18 @@ const Header = () => {
           ) : (
             <>
               <Button
+                component={ReactRouterLink}
                 sx={{ marginLeft: 'auto' }}
                 variant="contained"
-                href="/signin"
+                to="/signin"
               >
                 LOGIN
               </Button>
               <Button
+                component={ReactRouterLink}
                 sx={{ marginLeft: '10px' }}
                 variant="contained"
-                href="/signup"
+                to="/signup"
               >
                 SIGN UP
               </Button>
@@ -123,6 +139,4 @@ const Header = () => {
       </AppBar>
     </React.Fragment>
   );
-};
-
-export default Header;
+}
