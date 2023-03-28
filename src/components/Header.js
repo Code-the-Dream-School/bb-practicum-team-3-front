@@ -30,7 +30,6 @@ export default function Header() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
-  console.log(isMatch);
 
   return (
     <React.Fragment>
