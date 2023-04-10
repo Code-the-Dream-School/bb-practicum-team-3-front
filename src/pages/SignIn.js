@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import fetchSignin from '../api/fetchSignin';
 import {
   Avatar,
   Button,
@@ -20,12 +22,23 @@ import {
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const submissionData = {
       email: data.get('email'),
       password: data.get('password'),
+    };
+
+    fetchSignin(submissionData).then((returnMessage) => {
+      if (returnMessage.user) {
+        console.log(returnMessage);
+        return navigate('/');
+      } else {
+        console.log(returnMessage.error);
+      }
     });
   };
 
