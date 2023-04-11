@@ -7,7 +7,6 @@ export default async function fetchSignup(signUpData) {
     credentials: 'include',
     body: JSON.stringify(signUpData),
   });
-  console.log(JSON.stringify(signUpData));
 
   const returnMessage = await res.json();
   return returnMessage;
