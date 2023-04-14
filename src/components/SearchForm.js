@@ -7,7 +7,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';
 import BedroomParentIcon from '@mui/icons-material/BedroomParent';
-import fetchHotels from '../api/fetchHotels';
 import { useNavigate } from 'react-router-dom';
 
 export default function SearchForm() {
@@ -22,41 +21,15 @@ export default function SearchForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    //console.log(destination);
-    //console.log(checkinDate);
-    // console.log(checkoutDate);
-    //console.log(guestNumber);
-
-    const searchData = {
-      destination,
-      guestNumber,
-      roomNumber,
-      checkinDate:
-        checkinDate !== null ? checkinDate.format('YYYY-MM-DD') : null,
-      checkoutDate:
-        checkoutDate !== null ? checkoutDate.format('YYYY-MM-DD') : null,
-    };
-
     const formattedCheckinDate =
       checkinDate !== null ? checkinDate.format('YYYY-MM-DD') : null;
-    const formattedCheckOutDate =
+    const formattedCheckoutDate =
       checkoutDate !== null ? checkoutDate.format('YYYY-MM-DD') : null;
 
-    console.log('checkinDate', formattedCheckinDate);
-
-    const queryString = `?destination=${destination}&guestNumber=${guestNumber}&roomNumber=${roomNumber}&checkinDate=${formattedCheckinDate}&checkoutDate=${formattedCheckOutDate}`;
-
-    console.log(searchData);
-    fetchHotels(searchData).then((returnMessage) => {
-      console.log('fetchHotelData', returnMessage);
-      //navigate(`/searchresults${queryString}`);
-    });
-    // setDestination('');
-    //setCheckinDate(null);
-    //setCheckoutDate(null);
-    //setGuestNumber(2);
-    //setRoomNumber(1);
+    const queryString = `?destination=${destination}&guestNumber=${guestNumber}&roomNumber=${roomNumber}&checkinDate=${formattedCheckinDate}&checkoutDate=${formattedCheckoutDate}`;
+    navigate(`/searchresults${queryString}`);
   };
+
   return (
     <Container maxWidth="xl">
       <Box
@@ -70,21 +43,22 @@ export default function SearchForm() {
         <Paper
           sx={{
             borderRadius: 5,
-            p: 3,
+            p: 2,
             width: '100%',
             flexWrap: 'wrap',
           }}
           elevation={12}
         >
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={4}>
+            <Grid container spacing={1} columns={14}>
+              <Grid item xs={14} md={4.5}>
                 <TextField
                   id="name-input"
                   name="destination"
                   label="Destination"
                   type="text"
                   fullWidth
+                  required
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
                   InputProps={{
@@ -97,7 +71,7 @@ export default function SearchForm() {
                 />
               </Grid>
 
-              <Grid item xs={12} md={2}>
+              <Grid item xs={14} md={2.5}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     label="Check-in date"
@@ -108,7 +82,7 @@ export default function SearchForm() {
                 </LocalizationProvider>
               </Grid>
 
-              <Grid item xs={12} md={2}>
+              <Grid item xs={14} md={2.5}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     sx={{ width: '100%' }}
@@ -119,7 +93,7 @@ export default function SearchForm() {
                 </LocalizationProvider>
               </Grid>
 
-              <Grid item xs={12} md={1}>
+              <Grid item xs={14} md={1.5}>
                 <TextField
                   id="guestNumber"
                   name="guests"
@@ -134,12 +108,12 @@ export default function SearchForm() {
                         <PersonIcon />
                       </InputAdornment>
                     ),
-                    inputProps: { min: 0 },
+                    inputProps: { min: 1 },
                   }}
                 />
               </Grid>
 
-              <Grid item xs={12} md={1}>
+              <Grid item xs={14} md={1.5}>
                 <TextField
                   id="roomNumber"
                   name="rooms"
@@ -154,12 +128,12 @@ export default function SearchForm() {
                         <BedroomParentIcon />
                       </InputAdornment>
                     ),
-                    inputProps: { min: 0 },
+                    inputProps: { min: 1 },
                   }}
                 />
               </Grid>
 
-              <Grid item xs={12} md={2}>
+              <Grid item xs={14} md={1.5}>
                 <Button
                   variant="contained"
                   color="primary"
