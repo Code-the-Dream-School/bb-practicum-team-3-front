@@ -119,13 +119,16 @@ export default function SearchResultsCard({ hotel }) {
                       variant="subtitle2"
                       component="p"
                       mr={0.5}
-                      px={0.8}
-                      py={0.3}
+                      px={0.3}
+                      py={0.1}
                       sx={{
                         color: "white",
                         fontWeight: "bold",
                         backgroundColor: "secondary.main",
                         borderRadius: "5px",
+                        width: "20px",
+                        height: "20px",
+                        textAlign: "center",
                       }}
                     >
                       {hotel.review_score}

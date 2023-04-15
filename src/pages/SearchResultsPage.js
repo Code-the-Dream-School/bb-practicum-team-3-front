@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Grid,
-  Typography,
-  LinearProgress,
-  Stack,
-} from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import SearchResultsCard from "../components/SearchResultsCard";
 import fetchHotels from "../api/fetchHotels";
 import { useLocation } from "react-router-dom";
+import Loading from "../components/Loading";
 
 export default function SearchResultsPage() {
   const location = useLocation();
@@ -34,7 +29,6 @@ export default function SearchResultsPage() {
     fetchHotels(searchData).then((returnMessage) => {
       setHotelData(returnMessage.data);
       setIsFetching(true);
-      console.log("fetchHotelData", returnMessage.data);
     });
   }, [location.search]);
 
@@ -45,7 +39,8 @@ export default function SearchResultsPage() {
           <Typography
             variant="h5"
             component="h1"
-            sx={{ mb: 2, fontSize: { xs: "1.2rem" } }}
+            fontWeight="bold"
+            sx={{ mb: 2, fontSize: { xs: "1.6rem" } }}
           >
             {hotelData.destinationName
               .split(" ")
@@ -68,12 +63,7 @@ export default function SearchResultsPage() {
           </Grid>
         </>
       ) : (
-        <Stack sx={{ width: "100%" }} spacing={2}>
-          <LinearProgress />
-          <LinearProgress />
-          <LinearProgress />
-          <LinearProgress />
-        </Stack>
+        <Loading />
       )}
     </Container>
   );
