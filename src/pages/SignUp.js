@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
   Box,
@@ -14,16 +15,29 @@ import {
   createTheme,
   Link,
 } from '@mui/material';
+import fetchSignup from '../api/fetchSignup';
 
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const submissionData = {
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
+    };
+
+    fetchSignup(submissionData).then((returnMessage) => {
+      if (returnMessage.user) {
+        return navigate('/');
+      } else {
+        console.log(returnMessage.error);
+      }
     });
   };
 
