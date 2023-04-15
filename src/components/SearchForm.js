@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { Grid, TextField, Button, Paper, Box, Container } from '@mui/material';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import InputAdornment from '@mui/material/InputAdornment';
-import SearchIcon from '@mui/icons-material/Search';
-import PersonIcon from '@mui/icons-material/Person';
-import BedroomParentIcon from '@mui/icons-material/BedroomParent';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Grid, TextField, Button, Paper, Box, Container } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchIcon from "@mui/icons-material/Search";
+import PersonIcon from "@mui/icons-material/Person";
+import BedroomParentIcon from "@mui/icons-material/BedroomParent";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchForm() {
   const navigate = useNavigate();
 
-  const [destination, setDestination] = useState('');
+  const [destination, setDestination] = useState("");
   const [checkinDate, setCheckinDate] = useState(null);
   const [checkoutDate, setCheckoutDate] = useState(null);
   const [guestNumber, setGuestNumber] = useState(2);
@@ -22,9 +22,9 @@ export default function SearchForm() {
     event.preventDefault();
 
     const formattedCheckinDate =
-      checkinDate !== null ? checkinDate.format('YYYY-MM-DD') : null;
+      checkinDate !== null ? checkinDate.format("YYYY-MM-DD") : null;
     const formattedCheckoutDate =
-      checkoutDate !== null ? checkoutDate.format('YYYY-MM-DD') : null;
+      checkoutDate !== null ? checkoutDate.format("YYYY-MM-DD") : null;
 
     const queryString = `?destination=${destination}&guestNumber=${guestNumber}&roomNumber=${roomNumber}&checkinDate=${formattedCheckinDate}&checkoutDate=${formattedCheckoutDate}`;
     navigate(`/searchresults${queryString}`);
@@ -34,18 +34,18 @@ export default function SearchForm() {
     <Container maxWidth="xl">
       <Box
         sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          marginTop: '100px',
-          marginBottom: '50px',
+          display: "flex",
+          flexWrap: "wrap",
+          marginTop: "100px",
+          marginBottom: "50px",
         }}
       >
         <Paper
           sx={{
             borderRadius: 5,
             p: 2,
-            width: '100%',
-            flexWrap: 'wrap',
+            width: "100%",
+            flexWrap: "wrap",
           }}
           elevation={12}
         >
@@ -75,7 +75,7 @@ export default function SearchForm() {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     label="Check-in date"
-                    sx={{ width: '100%' }}
+                    sx={{ width: "100%" }}
                     value={checkinDate}
                     onChange={(newValue) => setCheckinDate(newValue)}
                   />
@@ -85,7 +85,7 @@ export default function SearchForm() {
               <Grid item xs={14} md={2.5}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
-                    sx={{ width: '100%' }}
+                    sx={{ width: "100%" }}
                     label="Check-out date"
                     value={checkoutDate}
                     onChange={(newValue) => setCheckoutDate(newValue)}
@@ -139,7 +139,7 @@ export default function SearchForm() {
                   color="primary"
                   type="submit"
                   size="large"
-                  sx={{ height: '55px', width: '100%' }}
+                  sx={{ height: "55px", width: "100%" }}
                 >
                   Search
                 </Button>

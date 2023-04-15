@@ -1,10 +1,10 @@
 export default async function fetchLogout() {
   const res = await fetch(`${process.env.REACT_APP_BASE_URL}/auth/logout`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-    credentials: 'include',
+    credentials: "include",
   });
 
   const returnMessage = await res.json();

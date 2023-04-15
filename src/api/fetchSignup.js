@@ -1,10 +1,10 @@
 export default async function fetchSignup(signUpData) {
   const res = await fetch(`${process.env.REACT_APP_BASE_URL}/auth/register`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-    credentials: 'include',
+    credentials: "include",
     body: JSON.stringify(signUpData),
   });
 
