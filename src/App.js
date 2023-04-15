@@ -1,28 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { getAllData } from "./util/index";
+import React from "react";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import SearchResultsPage from "./pages/SearchResultsPage";
 
-const URL = "http://localhost:8000/api/v1/";
-
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    (async () => {
-      const myData = await getAllData(URL);
-      setMessage(myData.data);
-    })();
-
-    return () => {
-      console.log("unmounting");
-    };
-  }, []);
-
   return (
-    <>
-      <SearchResultsPage />
-      {/* <h1>{message}</h1> */}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/searchresults" element={<SearchResultsPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

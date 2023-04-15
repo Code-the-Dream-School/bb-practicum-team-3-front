@@ -14,6 +14,10 @@ import {
 } from "@mui/material";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
+// import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import { Link as ReactRouterLink } from "react-router-dom";
 
 const theme = createTheme({
   components: {
@@ -51,7 +55,7 @@ export default function SearchResultsCard({ hotel }) {
         <Card
           elevation={4}
           sx={{
-            minHeight: { xs: 200, sm: 230, md: 230 },
+            minHeight: { xs: 200, sm: 300, md: 256 },
             borderRadius: "14px",
             display: "flex",
             flexDirection: "row",
@@ -61,12 +65,13 @@ export default function SearchResultsCard({ hotel }) {
             sx={{
               minHeight: 140,
               width: { xs: "35%", sm: "30%", md: "30%", lg: "30%" },
-              maxHeight: { xs: 260, sm: 230, md: 230 },
+              maxHeight: { xs: 300, sm: 300, md: 300 },
             }}
             component={"img"}
-            src={hotel.img}
+            src={hotel.image_url}
             alt={hotel.name}
           />
+
           <Box
             sx={{
               display: "flex",
@@ -84,6 +89,7 @@ export default function SearchResultsCard({ hotel }) {
               >
                 {hotel.name}
               </Typography>
+
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 {isMatch ? (
                   <>
@@ -96,7 +102,7 @@ export default function SearchResultsCard({ hotel }) {
                         color: "primary.main",
                       }}
                     >
-                      {hotel.rating}
+                      {hotel.review_score}
                     </Typography>
                     <Typography
                       variant="body2"
@@ -104,7 +110,7 @@ export default function SearchResultsCard({ hotel }) {
                       ml={0.5}
                       sx={{ fontWeight: "bold", color: "primary.main" }}
                     >
-                      {hotel.ratingFeedback}
+                      {hotel.review_score_word}
                     </Typography>
                   </>
                 ) : (
@@ -122,7 +128,7 @@ export default function SearchResultsCard({ hotel }) {
                         borderRadius: "5px",
                       }}
                     >
-                      {hotel.rating}
+                      {hotel.review_score}
                     </Typography>
                     <Typography
                       variant="subtitle2"
@@ -130,14 +136,15 @@ export default function SearchResultsCard({ hotel }) {
                       ml={0.5}
                       sx={{ fontWeight: "bold" }}
                     >
-                      {hotel.ratingFeedback}
+                      {hotel.review_score_word}
                     </Typography>
                   </>
                 )}
                 <Typography variant="body2" component="p" ml={1.5}>
-                  ({hotel.reviews} reviews)
+                  ({hotel.review_number} reviews)
                 </Typography>
               </Box>
+
               <Box
                 sx={{
                   display: "flex",
@@ -148,23 +155,82 @@ export default function SearchResultsCard({ hotel }) {
                 }}
               >
                 <LocationOnOutlinedIcon sx={{ width: 16, mr: 0.5 }} />
-                <Typography variant="body2" component="p">
-                  {hotel.district} • {hotel.distanceFromCenter} miles from
-                  center
-                </Typography>
+                {hotel.distance === "0" ? (
+                  <Typography variant="body2" component="p">
+                    {hotel.district} • in the center
+                  </Typography>
+                ) : (
+                  <Typography variant="body2" component="p">
+                    {hotel.district} • {hotel.distance} from center
+                  </Typography>
+                )}
               </Box>
-              {hotel.freeCancellation && (
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <CheckIcon sx={{ width: 18, color: "green", mr: 0.5 }} />
-                  <Typography variant="body2">Free cancellation</Typography>
+
+              <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "100%", md: "50%", lg: "50%" },
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    {hotel.is_free_cancellable === "Yes" ? (
+                      <CheckIcon sx={{ width: 18, color: "green", mr: 0.5 }} />
+                    ) : hotel.is_free_cancellable === "No" ? (
+                      <CloseIcon sx={{ width: 16, color: "red", mr: 0.7 }} />
+                    ) : (
+                      <QuestionMarkIcon
+                        sx={{ width: 18, color: "#A9A9A9", mr: 0.5 }}
+                      />
+                    )}
+                    <Typography variant="body2">Free cancellation</Typography>
+                  </Box>
+
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    {hotel.hotel_include_breakfast === "Yes" ? (
+                      <CheckIcon sx={{ width: 18, color: "green", mr: 0.5 }} />
+                    ) : hotel.hotel_include_breakfast === "No" ? (
+                      <CloseIcon sx={{ width: 16, color: "red", mr: 0.7 }} />
+                    ) : (
+                      <QuestionMarkIcon
+                        sx={{ width: 15, color: "#A9A9A9", mr: 0.8 }}
+                      />
+                    )}
+                    <Typography variant="body2">Breakfast included</Typography>
+                  </Box>
                 </Box>
-              )}
-              {hotel.freeWifi && (
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <CheckIcon sx={{ width: 18, color: "green", mr: 0.5 }} />
-                  <Typography variant="body2">Free Internet Access</Typography>
+
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "100%", md: "50%", lg: "50%" },
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    {hotel.has_free_parking === "Yes" ? (
+                      <CheckIcon sx={{ width: 18, color: "green", mr: 0.5 }} />
+                    ) : hotel.has_free_parking === "No" ? (
+                      <CloseIcon sx={{ width: 16, color: "red", mr: 0.7 }} />
+                    ) : (
+                      <QuestionMarkIcon
+                        sx={{ width: 15, color: "#A9A9A9", mr: 0.8 }}
+                      />
+                    )}
+                    <Typography variant="body2">Free parking</Typography>
+                  </Box>
+
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    {hotel.has_swimming_pool === "Yes" ? (
+                      <CheckIcon sx={{ width: 18, color: "green", mr: 0.5 }} />
+                    ) : hotel.has_swimming_pool === "No" ? (
+                      <CloseIcon sx={{ width: 16, color: "red", mr: 0.7 }} />
+                    ) : (
+                      <QuestionMarkIcon
+                        sx={{ width: 15, color: "#A9A9A9", mr: 0.8 }}
+                      />
+                    )}
+                    <Typography variant="body2">Swimming pool</Typography>
+                  </Box>
                 </Box>
-              )}
+              </Box>
             </CardContent>
 
             <CardActions sx={{ justifyContent: "space-between", px: 2, pb: 2 }}>
@@ -179,7 +245,13 @@ export default function SearchResultsCard({ hotel }) {
                   ${hotel.price}
                 </Typography>
               </Box>
-              <Button size="small" variant="contained" href="#">
+
+              <Button
+                component={ReactRouterLink}
+                size="small"
+                variant="contained"
+                to="/hoteldetail"
+              >
                 See Availability
               </Button>
             </CardActions>
