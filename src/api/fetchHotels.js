@@ -4,7 +4,6 @@ export default async function fetchHotels(searchData) {
     `${process.env.REACT_APP_BASE_URL}/booking/hotelsbylocation?${searchParams}`,
     {
       method: 'GET',
-
       credentials: 'include',
     }
   );
