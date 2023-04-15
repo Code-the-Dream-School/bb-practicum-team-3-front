@@ -21,8 +21,7 @@ export default function Footer() {
       sx={{
         py: 1,
         px: 2,
-        mt: "auto",
-        position: "fixed",
+        position: "fixed ",
         bottom: 0,
         left: 0,
         right: 0,

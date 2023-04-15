@@ -36,8 +36,8 @@ export default function SearchForm() {
         sx={{
           display: "flex",
           flexWrap: "wrap",
-          marginTop: "100px",
-          marginBottom: "50px",
+          marginTop: "80px",
+          marginBottom: "20px",
         }}
       >
         <Paper
