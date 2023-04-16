@@ -90,6 +90,8 @@ export default function SearchResultsCard({ hotel }) {
               </Typography>
 
               <Box sx={{ display: "flex", alignItems: "center" }}>
+                {hotel.review_score && hotel.review_score_word && hotel.review_number && (
+                <>
                 {isMatch ? (
                   <>
                     <Typography
@@ -143,8 +145,11 @@ export default function SearchResultsCard({ hotel }) {
                   </>
                 )}
                 <Typography variant="body2" component="p" ml={1.5}>
-                  ({hotel.review_number} reviews)
+                  {/* ({hotel.review_number} reviews) */}
+                  {`(${hotel.review_number.toLocaleString("en-US")} reviews)`}
                 </Typography>
+                </>
+              )}
               </Box>
 
               <Box
