@@ -15,7 +15,6 @@ import {
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-// import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { Link as ReactRouterLink } from "react-router-dom";
 
@@ -51,11 +50,11 @@ export default function SearchResultsCard({ hotel }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={12} md={6}>
         <Card
           elevation={4}
           sx={{
-            minHeight: { xs: 200, sm: 300, md: 256 },
+            minHeight: { xs: 200, sm: 220, md: 256 },
             borderRadius: "14px",
             display: "flex",
             flexDirection: "row",
@@ -172,7 +171,7 @@ export default function SearchResultsCard({ hotel }) {
               <Box sx={{ display: "flex", flexWrap: "wrap" }}>
                 <Box
                   sx={{
-                    width: { xs: "100%", sm: "100%", md: "50%", lg: "50%" },
+                    width: { xs: "100%", sm: "50%", md: "50%", lg: "50%" },
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -204,7 +203,7 @@ export default function SearchResultsCard({ hotel }) {
 
                 <Box
                   sx={{
-                    width: { xs: "100%", sm: "100%", md: "50%", lg: "50%" },
+                    width: { xs: "100%", sm: "50%", md: "50%", lg: "50%" },
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -245,7 +244,7 @@ export default function SearchResultsCard({ hotel }) {
                   fontWeight="600"
                   color="green"
                 >
-                  ${hotel.price}
+                  {`$${hotel.price.toLocaleString("en-US")}`}
                 </Typography>
               </Box>
 
