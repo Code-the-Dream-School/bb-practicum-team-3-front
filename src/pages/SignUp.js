@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Link as ReactRouterLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import * as React from "react";
+import { Link as ReactRouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {
   Box,
   Typography,
@@ -14,8 +14,8 @@ import {
   ThemeProvider,
   createTheme,
   Link,
-} from '@mui/material';
-import fetchSignup from '../api/fetchSignup';
+} from "@mui/material";
+import fetchSignup from "../api/fetchSignup";
 
 const theme = createTheme();
 
@@ -26,15 +26,15 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const submissionData = {
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      email: data.get("email"),
+      password: data.get("password"),
     };
 
     fetchSignup(submissionData).then((returnMessage) => {
       if (returnMessage.user) {
-        return navigate('/');
+        return navigate("/");
       } else {
         console.log(returnMessage.error);
       }
@@ -48,12 +48,12 @@ export default function SignUp() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { Link as ReactRouterLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import fetchSignin from '../api/fetchSignin';
+import * as React from "react";
+import { Link as ReactRouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import fetchSignin from "../api/fetchSignin";
 import {
   Avatar,
   Button,
@@ -17,7 +17,7 @@ import {
   Checkbox,
   FormControlLabel,
   Link,
-} from '@mui/material';
+} from "@mui/material";
 
 const theme = createTheme();
 
@@ -28,14 +28,14 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const submissionData = {
-      email: data.get('email'),
-      password: data.get('password'),
+      email: data.get("email"),
+      password: data.get("password"),
     };
 
     fetchSignin(submissionData).then((returnMessage) => {
       if (returnMessage.user) {
         console.log(returnMessage);
-        return navigate('/');
+        return navigate("/");
       } else {
         console.log(returnMessage.error);
       }
@@ -49,12 +49,12 @@ export default function SignIn() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
