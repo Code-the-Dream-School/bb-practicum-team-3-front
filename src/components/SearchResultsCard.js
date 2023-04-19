@@ -64,7 +64,7 @@ export default function SearchResultsCard({ hotel }) {
             sx={{
               minHeight: 140,
               width: { xs: "35%", sm: "30%", md: "30%", lg: "30%" },
-              maxHeight: { xs: 300, sm: 300, md: 300 },
+              maxHeight: { xs: 300, sm: 220, md: 300, lg: 256 },
             }}
             component={"img"}
             src={hotel.image_url}
