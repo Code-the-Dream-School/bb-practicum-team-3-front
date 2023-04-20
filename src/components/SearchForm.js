@@ -18,6 +18,25 @@ export default function SearchForm() {
   const [guestNumber, setGuestNumber] = useState(2);
   const [roomNumber, setRoomNumber] = useState(1);
 
+  const handleCheckinChange = (date) => {
+    setCheckinDate(date);
+
+    if (!checkoutDate) {
+      setCheckoutDate(date.add(1, "day"));
+    } else if (checkoutDate && date.isAfter(checkoutDate)) {
+      setCheckoutDate(date.add(1, "day"));
+    }
+  };
+
+  const handleCheckoutChange = (date) => {
+    setCheckoutDate(date);
+    if (!checkinDate) {
+      setCheckinDate(date.subtract(1, "day"));
+    } else if (checkinDate && date.isBefore(checkinDate)) {
+      setCheckinDate(date.subtract(1, "day"));
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -71,27 +90,25 @@ export default function SearchForm() {
                 />
               </Grid>
 
-              <Grid item xs={14} md={2.5}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Grid item xs={14} md={2.5}>
                   <DatePicker
                     label="Check-in date"
                     sx={{ width: "100%" }}
                     value={checkinDate}
-                    onChange={(newValue) => setCheckinDate(newValue)}
+                    onChange={handleCheckinChange}
                   />
-                </LocalizationProvider>
-              </Grid>
+                </Grid>
 
-              <Grid item xs={14} md={2.5}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Grid item xs={14} md={2.5}>
                   <DatePicker
                     sx={{ width: "100%" }}
                     label="Check-out date"
                     value={checkoutDate}
-                    onChange={(newValue) => setCheckoutDate(newValue)}
+                    onChange={handleCheckoutChange}
                   />
-                </LocalizationProvider>
-              </Grid>
+                </Grid>
+              </LocalizationProvider>
 
               <Grid item xs={14} md={1.5}>
                 <TextField
