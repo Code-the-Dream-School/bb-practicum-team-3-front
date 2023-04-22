@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { Box, Typography, Container, Link } from '@mui/material';
+import * as React from "react";
+import { Box, Typography, Container, Link } from "@mui/material";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         StayFinder
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -21,16 +21,15 @@ export default function Footer() {
       sx={{
         py: 1,
         px: 2,
-        mt: 'auto',
-        position: 'fixed',
+        position: "fixed ",
         bottom: 0,
         left: 0,
         right: 0,
-        display: 'flex',
-        flexDirection: 'column',
+        display: "flex",
+        flexDirection: "column",
 
         backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
+          theme.palette.mode === "light"
             ? theme.palette.grey[200]
             : theme.palette.grey[800],
       }}
@@ -38,7 +37,7 @@ export default function Footer() {
       <Container maxWidth="sm" align="center">
         <Typography variant="body1">Footer</Typography>
         <Copyright />
-      </Container>{' '}
+      </Container>{" "}
     </Box>
   );
 }

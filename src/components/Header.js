@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
-import { Link as ReactRouterLink } from 'react-router-dom';
-import MenuIcon from '@mui/icons-material/Menu';
+import React, { useEffect, useState } from "react";
+import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
+
+import fetchUserToken from "../api/fetchUserToken";
+import fetchLogout from "../api/fetchLogout";
+import MenuIcon from "@mui/icons-material/Menu";
+
 import {
   AppBar,
   Box,
@@ -11,31 +15,61 @@ import {
   useMediaQuery,
   useTheme,
   Link,
-} from '@mui/material';
+} from "@mui/material";
 
 const navItems = [
   {
     id: 1,
-    name: 'LOGIN',
-    path: '/signin',
+    name: "LOGIN",
+    path: "/signin",
   },
   {
     id: 2,
-    name: 'SIGN UP',
-    path: '/signup',
+    name: "SIGN UP",
+    path: "/signup",
+  },
+  {
+    id: 3,
+    name: "PROFILE",
+    path: "/profile",
+  },
+  {
+    id: 4,
+    name: "LOGOUT",
+    path: "/logout",
   },
 ];
 
 export default function Header() {
+  const navigate = useNavigate();
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+
+  useEffect(() => {
+    fetchUserToken().then((data) => {
+      if (data.token) {
+        setIsUserLoggedIn(true);
+      }
+    });
+  }, []);
+
+  const handleLogout = async () => {
+    fetchLogout().then((returnMessage) => {
+      if (returnMessage.msg) {
+        setIsUserLoggedIn(false);
+        return navigate("/");
+      }
+    });
+  };
 
   return (
     <React.Fragment>
-      <AppBar sx={{ background: '#063970' }}>
+      <AppBar sx={{ background: "#063970" }}>
         <Toolbar>
-          <Typography sx={{ fontSize: '2rem', paddingLeft: '10%' }}>
+          <Typography sx={{ fontSize: "2rem", paddingLeft: "10%" }}>
             StayFinder
           </Typography>
           {isMatch ? (
@@ -43,12 +77,12 @@ export default function Header() {
               <MenuIcon
                 sx={{
                   display: {
-                    xs: 'block',
-                    lg: 'none',
+                    xs: "block",
+                    lg: "none",
                   },
-                  cursor: 'pointer',
-                  color: '#fff',
-                  ml: 'auto',
+                  cursor: "pointer",
+                  color: "#fff",
+                  ml: "auto",
                 }}
                 onClick={() => setOpenMobileMenu(true)}
               />
@@ -60,15 +94,15 @@ export default function Header() {
               >
                 <Box
                   sx={{
-                    position: 'relative',
+                    position: "relative",
                     width: 250,
-                    backgroundColor: '#2461a6',
-                    height: '100%',
+                    backgroundColor: "#2461a6",
+                    height: "100%",
                     py: 3,
                     px: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
                   }}
                   role="presentation"
                   onClick={() => setOpenMobileMenu(false)}
@@ -76,37 +110,77 @@ export default function Header() {
                 >
                   <Box
                     sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
                       gap: 3,
                     }}
                   >
-                    {navItems.map((navItem) => (
-                      <Link
-                        component={ReactRouterLink}
-                        to={navItem.path}
-                        key={navItem.id}
-                        underline="none"
-                        color="#fff"
-                        sx={{
-                          fontWeight: '500',
-                          fontSize: '20px',
-                        }}
-                      >
-                        {navItem.name}
-                      </Link>
-                    ))}
+                    {isUserLoggedIn ? (
+                      <>
+                        <Link
+                          component={ReactRouterLink}
+                          to="/profile"
+                          underline="none"
+                          color="#fff"
+                          sx={{
+                            fontWeight: "500",
+                            fontSize: "20px",
+                          }}
+                        >
+                          PROFILE
+                        </Link>
+                        <Link
+                          component={Button}
+                          onClick={handleLogout}
+                          underline="none"
+                          color="#fff"
+                          sx={{
+                            fontWeight: "500",
+                            fontSize: "20px",
+                          }}
+                        >
+                          LOGOUT
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          component={ReactRouterLink}
+                          to="/signin"
+                          underline="none"
+                          color="#fff"
+                          sx={{
+                            fontWeight: "500",
+                            fontSize: "20px",
+                          }}
+                        >
+                          LOGIN
+                        </Link>
+                        <Link
+                          component={ReactRouterLink}
+                          to="/signup"
+                          underline="none"
+                          color="#fff"
+                          sx={{
+                            fontWeight: "500",
+                            fontSize: "20px",
+                          }}
+                        >
+                          SIGN UP
+                        </Link>
+                      </>
+                    )}
                   </Box>
                   <Typography
                     sx={{
-                      color: '#fff',
-                      fontWeight: '500',
-                      cursor: 'pointer',
-                      position: 'absolute',
-                      bottom: '14px',
-                      left: '50%',
-                      transform: 'translateX(-50%)',
+                      color: "#fff",
+                      fontWeight: "500",
+                      cursor: "pointer",
+                      position: "absolute",
+                      bottom: "14px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
                     }}
                   >
                     &#169; StayFinder
@@ -116,22 +190,44 @@ export default function Header() {
             </>
           ) : (
             <>
-              <Button
-                component={ReactRouterLink}
-                sx={{ marginLeft: 'auto' }}
-                variant="contained"
-                to="/signin"
-              >
-                LOGIN
-              </Button>
-              <Button
-                component={ReactRouterLink}
-                sx={{ marginLeft: '10px' }}
-                variant="contained"
-                to="/signup"
-              >
-                SIGN UP
-              </Button>
+              {isUserLoggedIn ? (
+                <>
+                  <Button
+                    component={ReactRouterLink}
+                    sx={{ marginLeft: "auto" }}
+                    variant="contained"
+                    to="/userprofile"
+                  >
+                    PROFILE
+                  </Button>
+                  <Button
+                    sx={{ marginLeft: "10px" }}
+                    variant="contained"
+                    onClick={handleLogout}
+                  >
+                    LOGOUT
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    component={ReactRouterLink}
+                    sx={{ marginLeft: "auto" }}
+                    variant="contained"
+                    to="/signin"
+                  >
+                    LOGIN
+                  </Button>
+                  <Button
+                    component={ReactRouterLink}
+                    sx={{ marginLeft: "10px" }}
+                    variant="contained"
+                    to="/signup"
+                  >
+                    SIGN UP
+                  </Button>
+                </>
+              )}
             </>
           )}
         </Toolbar>

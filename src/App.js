@@ -1,7 +1,9 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import HomePage from './pages/HomePage';
+import React from "react";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import SearchResultsPage from "./pages/SearchResultsPage";
 
 export default function App() {
   return (
@@ -10,6 +12,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/searchresults" element={<SearchResultsPage />} />
       </Routes>
     </BrowserRouter>
   );
