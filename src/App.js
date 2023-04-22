@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import SearchResultsPage from "./pages/SearchResultsPage";
+import UserProfilePage from "./pages/UserProfilePage";
+import Details from "./pages/Details";
 
 export default function App() {
   return (
@@ -13,6 +15,8 @@ export default function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/searchresults" element={<SearchResultsPage />} />
+        <Route path="/profile/*" element={<UserProfilePage />} />
+        <Route path="/reservation/:id" element={<Details />} />
       </Routes>
     </BrowserRouter>
   );
