@@ -14,7 +14,7 @@ export default function PopularDestinationGrid() {
       >
         Popular Destinations
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} mb="80px">
         {popularDestinationImages.map((image, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Link
@@ -26,6 +26,11 @@ export default function PopularDestinationGrid() {
                   position: "relative",
                   width: "100%",
                   height: "100%",
+                  border: "2px solid white",
+                  "&:hover": {
+                    border: "2px solid #FFD700",
+                    borderRadius: "16px",
+                  },
                 }}
               >
                 <img
