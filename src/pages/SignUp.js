@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -14,12 +14,16 @@ import {
   ThemeProvider,
   createTheme,
   Link,
+  Alert,
 } from "@mui/material";
 import fetchSignup from "../api/fetchSignup";
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -36,7 +40,8 @@ export default function SignUp() {
       if (returnMessage.user) {
         return navigate("/");
       } else {
-        console.log(returnMessage.error);
+        setErrorMessage(returnMessage.msg);
+        setIsError(true);
       }
     });
   };
@@ -112,6 +117,11 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
+            {isError ? (
+              <Alert sx={{ marginBottom: "8px" }} severity="error">
+                {errorMessage}
+              </Alert>
+            ) : null}
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link component={ReactRouterLink} to="/signin">
