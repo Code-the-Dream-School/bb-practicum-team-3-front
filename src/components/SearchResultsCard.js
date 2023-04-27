@@ -90,66 +90,69 @@ export default function SearchResultsCard({ hotel }) {
               </Typography>
 
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                {hotel.review_score && hotel.review_score_word && hotel.review_number && (
-                <>
-                {isMatch ? (
-                  <>
-                    <Typography
-                      variant="body2"
-                      component="p"
-                      mr={0.5}
-                      sx={{
-                        fontWeight: "bold",
-                        color: "primary.main",
-                      }}
-                    >
-                      {hotel.review_score}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      component="p"
-                      ml={0.5}
-                      sx={{ fontWeight: "bold", color: "primary.main" }}
-                    >
-                      {hotel.review_score_word}
-                    </Typography>
-                  </>
-                ) : (
-                  <>
-                    <Typography
-                      variant="subtitle2"
-                      component="p"
-                      mr={0.5}
-                      px={0.3}
-                      py={0.1}
-                      sx={{
-                        color: "white",
-                        fontWeight: "bold",
-                        backgroundColor: "secondary.main",
-                        borderRadius: "5px",
-                        width: "20px",
-                        height: "20px",
-                        textAlign: "center",
-                      }}
-                    >
-                      {hotel.review_score}
-                    </Typography>
-                    <Typography
-                      variant="subtitle2"
-                      component="p"
-                      ml={0.5}
-                      sx={{ fontWeight: "bold" }}
-                    >
-                      {hotel.review_score_word}
-                    </Typography>
-                  </>
-                )}
-                <Typography variant="body2" component="p" ml={1.5}>
-                  {/* ({hotel.review_number} reviews) */}
-                  {`(${hotel.review_number.toLocaleString("en-US")} reviews)`}
-                </Typography>
-                </>
-              )}
+                {hotel.review_score &&
+                  hotel.review_score_word &&
+                  hotel.review_number && (
+                    <>
+                      {isMatch ? (
+                        <>
+                          <Typography
+                            variant="body2"
+                            component="p"
+                            mr={0.5}
+                            sx={{
+                              fontWeight: "bold",
+                              color: "primary.main",
+                            }}
+                          >
+                            {hotel.review_score}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            component="p"
+                            ml={0.5}
+                            sx={{ fontWeight: "bold", color: "primary.main" }}
+                          >
+                            {hotel.review_score_word}
+                          </Typography>
+                        </>
+                      ) : (
+                        <>
+                          <Typography
+                            variant="subtitle2"
+                            component="p"
+                            mr={0.5}
+                            px={0.3}
+                            py={0.1}
+                            sx={{
+                              color: "white",
+                              fontWeight: "bold",
+                              backgroundColor: "secondary.main",
+                              borderRadius: "5px",
+                              width: "20px",
+                              height: "20px",
+                              textAlign: "center",
+                            }}
+                          >
+                            {hotel.review_score}
+                          </Typography>
+                          <Typography
+                            variant="subtitle2"
+                            component="p"
+                            ml={0.5}
+                            sx={{ fontWeight: "bold" }}
+                          >
+                            {hotel.review_score_word}
+                          </Typography>
+                        </>
+                      )}
+                      <Typography variant="body2" component="p" ml={1.5}>
+                        {`(${hotel.review_number.toLocaleString(
+                          "en-US"
+                        )} reviews)`}
+                      </Typography>
+                    </>
+                  )}
               </Box>
 
               <Box
