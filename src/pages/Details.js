@@ -1,19 +1,14 @@
-import Grid from "@mui/material/Grid";
 import {
   Container,
   Box,
   Typography,
   Button,
-  TableContainer,
-  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
 } from "@mui/material";
-//import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Link from "@mui/material/Link";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import { useNavigate } from "react-router-dom";
 
 function createData(id, item, details) {
@@ -57,10 +52,15 @@ export default function PersonalDetails() {
           flexWrap: "wrap",
           marginTop: "100px",
           marginBottom: "50px",
-          display: "inline-block",
         }}
       >
-        <Typography component="h1" variant="h3" color="primary" gutterBottom>
+        <Typography
+          component="h1"
+          variant="h3"
+          color="primary"
+          gutterBottom
+          align="center"
+        >
           Reservation details
         </Typography>
         <Box sx={{ flexGrow: 1 }}>

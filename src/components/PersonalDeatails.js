@@ -1,14 +1,15 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import { Container, Paper, Typography } from "@mui/material";
+import {
+  Container,
+  Table,
+  Typography,
+  Box,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Link from "@mui/material/Link";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 
 function createData(id, firstName, lastName, email) {
   return { id, firstName, lastName, email };
@@ -25,7 +26,6 @@ export default function PersonalDetails() {
     <Container component="main" maxWidth="sm">
       <Box
         sx={{
-          display: "flex",
           flexWrap: "wrap",
           marginTop: "100px",
           marginBottom: "50px",
@@ -55,7 +55,6 @@ export default function PersonalDetails() {
             <TableHead>
               <TableRow>
                 <TableCell></TableCell>
-
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>

@@ -8,19 +8,17 @@ import {
   useMediaQuery,
   useTheme,
   ListItemIcon,
+  Divider,
 } from "@mui/material";
+import People from "@mui/icons-material/People";
+import BedroomParentIcon from "@mui/icons-material/BedroomParent";
 import { Link, Route, Routes } from "react-router-dom";
 import Reservation from "../components/Reservation";
 import PersonalDetails from "../components/PersonalDeatails";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-//import { useLocation } from "react-router-dom";
-import People from "@mui/icons-material/People";
-import BedroomParentIcon from "@mui/icons-material/BedroomParent";
 
 export default function UserProfilePage() {
-  //const { pathname } = useLocation();
-
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -32,14 +30,21 @@ export default function UserProfilePage() {
           <Grid item xs={12}>
             <Box
               sx={{
-                bgcolor: "grey.200",
+                bgcolor: "#F7E2AE",
                 height: "15vh",
                 mt: 10,
                 alignItems: "center",
               }}
             >
               <List>
-                <ListItem component={Link} to={`/profile/personal-details`}>
+                <ListItem
+                  component={Link}
+                  to={`/profile/personal-details`}
+                  sx={{ paddingBottom: 1, paddingTop: 1 }}
+                >
+                  <ListItemIcon sx={{ fontSize: 20 }}>
+                    <People />
+                  </ListItemIcon>
                   <ListItemText
                     primary="Personal Details"
                     primaryTypographyProps={{
@@ -50,7 +55,15 @@ export default function UserProfilePage() {
                     }}
                   />
                 </ListItem>
-                <ListItem component={Link} to={`/profile/reservation-details`}>
+                <Divider />
+                <ListItem
+                  component={Link}
+                  to={`/profile/reservation-details`}
+                  sx={{ paddingBottom: 3, paddingTop: 1 }}
+                >
+                  <ListItemIcon sx={{ fontSize: 20 }}>
+                    <BedroomParentIcon />
+                  </ListItemIcon>
                   <ListItemText
                     primary="Reservation Details"
                     primaryTypographyProps={{
@@ -68,7 +81,6 @@ export default function UserProfilePage() {
             <Box sx={{ height: "100vh" }}>
               <Routes>
                 <Route index element={<PersonalDetails />} />
-
                 <Route
                   path={`/personal-details`}
                   element={<PersonalDetails />}
@@ -84,12 +96,23 @@ export default function UserProfilePage() {
       ) : (
         <>
           <Grid item xs={2}>
-            <Box sx={{ bgcolor: "grey.200", height: "100vh", mt: 7 }}>
+            <Box
+              sx={{
+                bgcolor: "#F7E2AE",
+                height: "100vh",
+                mt: 7,
+              }}
+            >
               <List>
                 <ListItem
                   component={Link}
                   to={`/profile/personal-details`}
-                  sx={{ mt: 5 }}
+                  sx={{
+                    mt: 5,
+                    "&:hover": {
+                      bgcolor: "#F7CD8F",
+                    },
+                  }}
                 >
                   <ListItemIcon sx={{ fontSize: 20 }}>
                     <People />
@@ -104,7 +127,15 @@ export default function UserProfilePage() {
                     }}
                   />
                 </ListItem>
-                <ListItem component={Link} to={`/profile/reservation-details`}>
+                <ListItem
+                  component={Link}
+                  to={`/profile/reservation-details`}
+                  sx={{
+                    "&:hover": {
+                      bgcolor: "#F7CD8F",
+                    },
+                  }}
+                >
                   <ListItemIcon sx={{ fontSize: 20 }}>
                     <BedroomParentIcon />
                   </ListItemIcon>
@@ -125,7 +156,6 @@ export default function UserProfilePage() {
             <Box sx={{ height: "100vh" }}>
               <Routes>
                 <Route index element={<PersonalDetails />} />
-
                 <Route
                   path={`/personal-details`}
                   element={<PersonalDetails />}
