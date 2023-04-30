@@ -4,8 +4,8 @@ import HomePage from "./pages/HomePage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import SearchResultsPage from "./pages/SearchResultsPage";
-import NotFound from "./pages/NotFound";
 import HotelDetails from "./pages/HotelDetails";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -15,8 +15,8 @@ export default function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/searchresults" element={<SearchResultsPage />} />
-        <Route path="*" element={<NotFound />} />
         <Route path="/hoteldetails" element={<HotelDetails />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

@@ -154,7 +154,7 @@ export default function HotelDetails() {
 
         <HotelImageGallery />
 
-        <Typography variant="h6" component="h2" fontWeight="600">
+        <Typography variant="h6" component="h2" fontWeight="600" py={2}>
           Overview
         </Typography>
         <Typography variant="body2" component="p">
@@ -193,7 +193,7 @@ export default function HotelDetails() {
               >
                 {hotelData.review_score}
               </Typography>
-              <Typography variant="h6" component="h2" fontWeight="600">
+              <Typography variant="h6" component="h2" fontWeight="600" py={2}>
                 Guest Rating
               </Typography>
             </Box>
@@ -261,7 +261,7 @@ export default function HotelDetails() {
 
           {/* Top Amentities */}
           <Grid item xs={8}>
-            <Typography variant="h6" component="h2" fontWeight="600">
+            <Typography variant="h6" component="h2" fontWeight="600" py={2}>
               Top Amenities
             </Typography>
             <Box sx={{ display: "flex", flexWrap: "wrap" }}>

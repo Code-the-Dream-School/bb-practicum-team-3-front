@@ -65,10 +65,10 @@ export default function Rooms() {
 
   return (
     <>
-      <Typography variant="h6" component="h2" fontWeight="600">
+      <Typography variant="h6" component="h2" fontWeight="600" py={2}>
         Availability
       </Typography>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex" }} mb={7}>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3, flex: 2 }}>
           {rooms.map((room, index) => (
             <Card
@@ -98,7 +98,6 @@ export default function Rooms() {
                   </Box>
 
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <PersonIcon />
                     <PersonIcon />
                     <Typography
                       variant="subtitle1"
@@ -165,7 +164,9 @@ export default function Rooms() {
             </Card>
           ))}
         </Box>
-        <Box sx={{ display: "flex", flex: 1 }}>
+
+        {/* Booking Summary Box*/}
+        <Box sx={{ flex: 1 }}>
           <Card
             elevation={4}
             sx={{
@@ -174,27 +175,34 @@ export default function Rooms() {
               width: "60%",
               mx: "auto",
               borderRadius: "14px",
-              p: 2,
             }}
           >
-            <Box>
-              <Box>
-                <Typography variant="body1" component="p">
-                  1 Room - 6 Nights
-                </Typography>
-                <Typography
-                  variant="h6"
-                  component="p"
-                  fontWeight="600"
-                  color="green"
-                  display="inline"
-                >
-                  ${rooms[0].price}{" "}
-                </Typography>
-              </Box>
-              <Box sx={{ display: "flex", flex: 1 }}>
-                <Button variant="contained">Reserve</Button>
-              </Box>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              bgcolor="#DFE4E8"
+              sx={{ height: 50 }}
+            >
+              <Typography variant="h6" component="p" fontWeight="600">
+                Your reservation details
+              </Typography>
+            </Box>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              <Typography variant="body1" component="p">
+                1 Room - 6 Nights
+              </Typography>
+              <Typography
+                variant="h6"
+                component="p"
+                fontWeight="600"
+                color="green"
+              >
+                ${rooms[0].price}{" "}
+              </Typography>
+            </Box>
+            <Box display="flex" flexDirection="column">
+              <Button variant="contained">Reserve</Button>
             </Box>
           </Card>
         </Box>
