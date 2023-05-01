@@ -17,6 +17,7 @@ import PersonIcon from "@mui/icons-material/Person";
 const rooms = [
   {
     roomType: "Standard Room",
+    room_id: 1,
     bedType: "1 king bed",
     sleeps: "2",
     price: 1500,
@@ -30,6 +31,7 @@ const rooms = [
   },
   {
     roomType: "Premium Room - City View",
+    room_id: 2,
     bedType: "1 king bed",
     sleeps: "2",
     price: 2000,
@@ -43,6 +45,7 @@ const rooms = [
   },
   {
     roomType: "Superior Room",
+    room_id: 3,
     bedType: "1 king bed",
     sleeps: "2",
     price: 2500,
@@ -70,8 +73,9 @@ export default function Rooms() {
       </Typography>
       <Box sx={{ display: "flex" }} mb={7}>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3, flex: 2 }}>
-          {rooms.map((room, index) => (
+          {rooms.map((room) => (
             <Card
+              key={room.room_id}
               elevation={4}
               sx={{
                 minHeight: { xs: 200, sm: 220, md: 220 },

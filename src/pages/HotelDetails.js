@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import SearchForm from "../components/SearchForm";
 import HotelImageGallery from "../components/HotelImageGallery";
 import Rooms from "../components/Rooms";
-import Reviews from "../components/Reviews";
+import ReviewsCarousel from "../components/ReviewsCarousel";
 import {
   Container,
   Box,
@@ -32,6 +32,311 @@ const hotelData = {
 
   nights: 6,
 };
+
+const reviews = [
+  {
+    id: 1,
+    name: "John Doe",
+    avatar: "https://picsum.photos/id/1/200/200",
+    rating: 4,
+    title: "Beautiful property",
+    countrycode: "United States",
+    comment:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium arcu sit amet nibh lacinia, vel eleifend nulla bibendum. Nullam sodales hendrerit mauris, vitae consequat mi euismod vel.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Wonderful weekend!",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt enim tincidunt enim tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "Nothing to complain, everything great",
+    date: "2020-04-27",
+  },
+  {
+    id: 3,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "",
+    date: "2023-04-27",
+  },
+  {
+    id: 4,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 5,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 3.5,
+    title: "Wonderful weekend!",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 6,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+
+  {
+    id: 7,
+    name: "John Doe",
+    avatar: "https://picsum.photos/id/1/200/200",
+    rating: 4,
+    title: "Beautiful property",
+    countrycode: "United States",
+    comment:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium arcu sit amet nibh lacinia, vel eleifend nulla bibendum. Nullam sodales hendrerit mauris, vitae consequat mi euismod vel.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 8,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Wonderful weekend!",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt enim tincidunt enim tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "Nothing to complain, everything great",
+    date: "2020-04-27",
+  },
+  {
+    id: 9,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "",
+    date: "2023-04-27",
+  },
+  {
+    id: 10,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 11,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 3.5,
+    title: "Wonderful weekend!",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 12,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 13,
+    name: "John Doe",
+    avatar: "https://picsum.photos/id/1/200/200",
+    rating: 4,
+    title: "Beautiful property",
+    countrycode: "United States",
+    comment:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium arcu sit amet nibh lacinia, vel eleifend nulla bibendum. Nullam sodales hendrerit mauris, vitae consequat mi euismod vel.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 14,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Wonderful weekend!",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt enim tincidunt enim tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "Nothing to complain, everything great",
+    date: "2020-04-27",
+  },
+  {
+    id: 15,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "",
+    date: "2023-04-27",
+  },
+  {
+    id: 16,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 17,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 3.5,
+    title: "Wonderful weekend!",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 18,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+
+  {
+    id: 19,
+    name: "John Doe",
+    avatar: "https://picsum.photos/id/1/200/200",
+    rating: 4,
+    title: "Beautiful property",
+    countrycode: "United States",
+    comment:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium arcu sit amet nibh lacinia, vel eleifend nulla bibendum. Nullam sodales hendrerit mauris, vitae consequat mi euismod vel.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 20,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Wonderful weekend!",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt enim tincidunt enim tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "Nothing to complain, everything great",
+    date: "2020-04-27",
+  },
+  {
+    id: 21,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "",
+    date: "2023-04-27",
+  },
+  {
+    id: 22,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 23,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 3.5,
+    title: "Wonderful weekend!",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 24,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+  {
+    id: 25,
+    name: "Jane Smith",
+    avatar: "https://picsum.photos/id/2/200/200",
+    rating: 5,
+    title: "Exceptional",
+    countrycode: "United States",
+    comment:
+      "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam consequat magna eu lectus mattis, vel euismod nibh dignissim. Pellentesque consectetur enim ut ligula ultrices, vel scelerisque enim tincidunt.",
+    cons: "small rooms.",
+    date: "2023-04-27",
+  },
+];
 
 export default function HotelDetails() {
   const theme = useTheme();
@@ -283,10 +588,20 @@ export default function HotelDetails() {
         </Grid>
 
         <Rooms />
-        <Reviews />
 
+        {/* Reviews Carousel */}
+        <Grid container mb={7}>
+          <Typography variant="h6" component="h2" fontWeight="600" pb={2}>
+            Reviews
+          </Typography>
+          <Grid item xs={12} md={12} lg={12}>
+            <ReviewsCarousel reviews={reviews} />
+          </Grid>
+        </Grid>
+
+        {/* Hotel on the map */}
         <Box>
-          <Typography variant="h6" component="h2" fontWeight="600">
+          <Typography variant="h6" component="h2" fontWeight="600" pb={2}>
             Neighborhood
           </Typography>
           <Box>
