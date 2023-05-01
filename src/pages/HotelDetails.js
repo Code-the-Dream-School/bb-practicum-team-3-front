@@ -31,6 +31,61 @@ const hotelData = {
   price: 1580,
 
   nights: 6,
+
+  hotel_facilities_filtered: [
+    "24-hour front desk",
+    "Sauna",
+    "Fitness centre",
+    "Airport shuttle",
+    "Heating",
+    "Non-smoking rooms",
+    "Express check-in/check-out",
+    "Spa and wellness centre",
+    "Cycling",
+    "Sauna",
+    "Luggage storage",
+    "Indoor pool",
+  ],
+  hotel_facilities: [
+    "Parking",
+    "24-hour front desk",
+    "Sauna",
+    "Fitness centre",
+    "Non-smoking rooms",
+    "Airport shuttle",
+    "Internet services",
+    "Express check-in/check-out",
+    "Spa and wellness centre",
+    "Hot tub/Jacuzzi",
+    "Cycling",
+    "Heating",
+    "Fax/photocopying",
+    "Luggage storage",
+    "WiFi",
+    "Allergy-free room",
+    "Indoor pool",
+    "Free WiFi",
+    "Non-smoking throughout",
+    "Indoor pool (all year)",
+    "Private check-in/check-out",
+    "Daily housekeeping",
+    "WiFi available in all areas",
+    "Parking garage",
+    "Heated pool",
+    "Shallow end",
+    "Fruits",
+    "Airport pick up",
+    "Airport drop off",
+    "Steam room",
+    "Fitness",
+    "Yoga classes",
+    "Fitness classes",
+    "Fitness/spa locker rooms",
+    "Swimming pool",
+    "Pub crawls",
+    "Aerobics",
+    "Swimming Pool",
+  ],
 };
 
 const reviews = [
@@ -346,6 +401,7 @@ export default function HotelDetails() {
       <Header />
       <SearchForm />
       <Container maxWidth="xl" sx={{ px: { xs: 0.5, sm: 2, md: 3 } }}>
+        {/* Header Info */}
         <Box
           sx={{
             display: "flex",
@@ -471,7 +527,7 @@ export default function HotelDetails() {
           container
           rowSpacing={1}
           my={2}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          columnSpacing={{ xs: 1, sm: 2, md: 5 }}
         >
           {/* Guest Rating */}
           <Grid item xs={4}>
@@ -566,23 +622,40 @@ export default function HotelDetails() {
 
           {/* Top Amentities */}
           <Grid item xs={8}>
-            <Typography variant="h6" component="h2" fontWeight="600" py={2}>
+            <Typography
+              variant="h6"
+              component="h2"
+              fontWeight="600"
+              pt={2}
+              pb={6}
+            >
               Top Amenities
             </Typography>
-            <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-              <Box
-                sx={{
-                  width: { xs: "100%", sm: "50%", md: "50%", lg: "50%" },
-                }}
-              >
-                <CheckIcon sx={{ width: 18, color: "green", mr: 0.5 }} />
-                <Typography variant="body2">Free cancellation</Typography>
-              </Box>
-              <Box
-                sx={{
-                  width: { xs: "100%", sm: "50%", md: "50%", lg: "50%" },
-                }}
-              ></Box>
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+              {hotelData.hotel_facilities_filtered
+                .slice(0, 8)
+                .map((facility, i) => {
+                  return (
+                    <Box
+                      key={i}
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        border: "1px solid #E7E7E7",
+                        py: 2.5,
+                        pl: 2,
+                        pr: 3,
+                        flexGrow: 1,
+                        maxWidth: "100%",
+                      }}
+                    >
+                      <CheckIcon sx={{ width: 25, color: "green", mr: 1.5 }} />
+                      <Typography variant="body1" component="h2">
+                        {facility}
+                      </Typography>
+                    </Box>
+                  );
+                })}
             </Box>
           </Grid>
         </Grid>
@@ -599,8 +672,39 @@ export default function HotelDetails() {
           </Grid>
         </Grid>
 
+        {/* All Amenities */}
+        <Typography variant="h6" component="h2" fontWeight="600" pb={2}>
+          Amenities of {hotelData.name}
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            minHeight: "400px",
+            justifyContent: "space-between",
+            mb: 7,
+          }}
+        >
+          {hotelData.hotel_facilities.map((facility, i) => (
+            <Box
+              key={i}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                minWidth: "150px",
+                flexBasis: "calc(25% - 16px)",
+              }}
+            >
+              <CheckIcon sx={{ width: 20, color: "green", mr: 1 }} />
+              <Typography variant="body2" component="h2">
+                {facility}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+
         {/* Hotel on the map */}
-        <Box>
+        <Box mb={7}>
           <Typography variant="h6" component="h2" fontWeight="600" pb={2}>
             Neighborhood
           </Typography>
