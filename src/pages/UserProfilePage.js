@@ -23,7 +23,11 @@ export default function UserProfilePage() {
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Grid container>
+    <Grid
+      container
+      style={{ gap: 1 }}
+      sx={{ width: "100vw", alignContent: "center", mr: "auto", ml: "auto" }}
+    >
       <Header />
       {isMatch ? (
         <>
@@ -32,7 +36,7 @@ export default function UserProfilePage() {
               sx={{
                 bgcolor: "#F7E2AE",
                 height: "15vh",
-                mt: 10,
+                mt: 6,
                 alignItems: "center",
               }}
             >
@@ -95,12 +99,16 @@ export default function UserProfilePage() {
         </>
       ) : (
         <>
-          <Grid item xs={2}>
+          <Box
+            sx={{ display: "flex", flexDirection: "row", flexWrap: "nowrap" }}
+          >
             <Box
               sx={{
                 bgcolor: "#F7E2AE",
                 height: "100vh",
                 mt: 7,
+                width: "200px",
+                mr: "16px",
               }}
             >
               <List>
@@ -151,9 +159,8 @@ export default function UserProfilePage() {
                 </ListItem>
               </List>
             </Box>
-          </Grid>
-          <Grid item xs={10}>
-            <Box sx={{ height: "100vh" }}>
+
+            <Box sx={{ height: "100vh", width: "100%" }}>
               <Routes>
                 <Route index element={<PersonalDetails />} />
                 <Route
@@ -166,7 +173,7 @@ export default function UserProfilePage() {
                 />
               </Routes>
             </Box>
-          </Grid>
+          </Box>
         </>
       )}
       <Footer />

@@ -11,18 +11,31 @@ import {
   TableRow,
 } from "@mui/material";
 
-function createData(id, checkin, nights, guests, hotel, city) {
-  return { id, checkin, nights, guests, hotel, city };
+function createData(id, item, details) {
+  return { id, item, details };
 }
+
 const rows = [
-  createData(0, "16 Mar, 2019", "12", "2", "La Quinta", "Orlando"),
-  createData(1, "20 Mar, 2019", "1", "3", "La Quinta", "New York"),
-  createData(2, "25 Mar, 2019", "3", "3", "La Quinta", "New York"),
+  createData(0, "Check-in:", "2023-09-30"),
+  createData(2, "Nights:", "3"),
+  createData(3, "Guests:", "2"),
+  createData(5, "Hotel:", "Hilton"),
+  createData(6, "City:", "Orlando"),
+  createData(7, "", <Link href="/reservation/:id">See details</Link>),
 ];
+
+// function createData(id, checkin, nights, guests, hotel, city) {
+//   return { id, checkin, nights, guests, hotel, city };
+// }
+// const rows = [
+//   createData(0, "16 Mar, 2019", "12", "2", "La Quinta", "Orlando"),
+//   createData(1, "20 Mar, 2019", "1", "3", "La Quinta", "New York"),
+//   createData(2, "25 Mar, 2019", "3", "3", "La Quinta", "New York"),
+// ];
 
 export default function Reservation() {
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main">
       <Box
         sx={{
           flexWrap: "wrap",
@@ -41,7 +54,7 @@ export default function Reservation() {
           Reservation details
         </Typography>
         <Box sx={{ flexGrow: 1 }}>
-          <Table size="small">
+          {/* <Table size="small">
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: "bold" }}>Check-in</TableCell>
@@ -63,6 +76,24 @@ export default function Reservation() {
                   <TableCell>
                     <Link href="/reservation/:id">See details</Link>{" "}
                   </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Box> */}
+
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.item}</TableCell>
+                  <TableCell>{row.details}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

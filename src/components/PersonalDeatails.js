@@ -23,13 +23,14 @@ const rows = [
 
 export default function PersonalDetails() {
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component="main">
       <Box
         sx={{
           flexWrap: "wrap",
           marginTop: "100px",
           marginBottom: "50px",
           display: "inline-block",
+          align: "center",
         }}
       >
         <Typography
