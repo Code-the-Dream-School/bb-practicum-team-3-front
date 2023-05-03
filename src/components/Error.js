@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import Warning from "../assets/warning.svg";
 
 export default function Error() {
