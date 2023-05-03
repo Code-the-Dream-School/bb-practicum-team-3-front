@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import fetchPersonalDetails from "../api/fetchPersonalDetails";
 
 function createData(id, firstName, lastName, email) {
   return { id, firstName, lastName, email };
@@ -22,6 +23,7 @@ const rows = [
 ];
 
 export default function PersonalDetails() {
+  const personalDetails = fetchPersonalDetails();
   return (
     <Container component="main">
       <Box
