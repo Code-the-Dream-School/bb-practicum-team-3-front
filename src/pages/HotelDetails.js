@@ -11,6 +11,7 @@ import {
   TableRow,
   Container,
 } from "@mui/material";
+import fetchConfirmHotel from "../api/fetchConfirmHotel";
 
 function createData(id, item, details) {
   return { id, item, details };
@@ -28,27 +29,34 @@ const rows = [
 ];
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-  //display: "flex",
-  //alignItems: "center",
-  //justifyContent: "center",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100vw",
+  height: "100vh",
+  // position: "absolute",
+  // top: "0",
+  // left: "0",
 };
 
 export default function HotelDetails() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleConfirm = () =>
+    fetchConfirmHotel({
+      checkin: "2023-04-19",
+      checkout: "2023-04-22",
+      total_days: 3,
+      total_guests: 2,
+      total_rooms: 1,
+      total_price: 270,
+      address: "some address",
+      date_received: "2023-04-05",
+    });
 
   return (
-    <Box display="flex" flexDirection="column" sx={{ width: "100px" }}>
+    <>
       <Button variant="contained" onClick={handleOpen}>
         Reserve
       </Button>
@@ -56,35 +64,47 @@ export default function HotelDetails() {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h3" component="h2">
-            Reservation form
-          </Typography>
-          <Table size="medium" sx={{ mb: 3 }}>
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.item}</TableCell>
-                  <TableCell>{row.details}</TableCell>
+          <Box
+            sx={{
+              width: "90%",
+              maxWidth: "500px",
+              bgcolor: "background.paper",
+              p: "4px",
+            }}
+          >
+            <Typography id="modal-title" variant="h3" component="h2">
+              Reservation form
+            </Typography>
+            <Table size="medium" sx={{ mb: 3 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <Button variant="contained">Confirm</Button>
-          <Button variant="contained" onClick={handleClose} sx={{ ml: 12 }}>
-            Cancel
-          </Button>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow key={row.id}>
+                    <TableCell>{row.item}</TableCell>
+                    <TableCell>{row.details}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <Button variant="contained" onClick={handleConfirm}>
+              Confirm
+            </Button>
+
+            <Button variant="contained" onClick={handleClose} sx={{ ml: 12 }}>
+              Cancel
+            </Button>
+          </Box>
         </Box>
       </Modal>
-    </Box>
+    </>
   );
 }
