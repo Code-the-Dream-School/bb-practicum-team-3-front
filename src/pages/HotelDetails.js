@@ -9,7 +9,6 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Container,
 } from "@mui/material";
 import fetchConfirmHotel from "../api/fetchConfirmHotel";
 
@@ -24,8 +23,8 @@ const rows = [
   createData(3, "Total guests:", "2"),
   createData(4, "Total units:", "1"),
   createData(5, "Hotel:", "Hilton"),
-  createData(6, "Location:", ""),
-  createData(7, "Total price:", "567.90"),
+  createData(6, "Location:", "some address"),
+  createData(7, "Total price:", "$567.90"),
 ];
 
 const style = {
@@ -34,9 +33,6 @@ const style = {
   justifyContent: "center",
   width: "100vw",
   height: "100vh",
-  // position: "absolute",
-  // top: "0",
-  // left: "0",
 };
 
 export default function HotelDetails() {
@@ -73,11 +69,19 @@ export default function HotelDetails() {
               width: "90%",
               maxWidth: "500px",
               bgcolor: "background.paper",
-              p: "4px",
+              p: "40px",
+              m: "20px",
+              border: "2px solid #000",
+              borderRadius: "3%",
             }}
           >
-            <Typography id="modal-title" variant="h3" component="h2">
-              Reservation form
+            <Typography
+              id="modal-title"
+              variant="h5"
+              component="h2"
+              align="center"
+            >
+              Booking confirmation
             </Typography>
             <Table size="medium" sx={{ mb: 3 }}>
               <TableHead>
@@ -95,13 +99,29 @@ export default function HotelDetails() {
                 ))}
               </TableBody>
             </Table>
-            <Button variant="contained" onClick={handleConfirm}>
-              Confirm
-            </Button>
+            <Box
+              sx={{
+                alignItems: "center",
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
+              <Button
+                variant="contained"
+                onClick={handleConfirm}
+                sx={{ m: "auto" }}
+              >
+                Confirm
+              </Button>
 
-            <Button variant="contained" onClick={handleClose} sx={{ ml: 12 }}>
-              Cancel
-            </Button>
+              <Button
+                variant="outlined"
+                onClick={handleClose}
+                sx={{ m: "auto" }}
+              >
+                Cancel
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Modal>
