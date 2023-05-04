@@ -50,6 +50,7 @@ const rooms = [
 
 export default function Rooms() {
   const [totalRooms, setTotalRooms] = React.useState(0);
+  const [totalPrice, setTotalPrice] = React.useState(0);
 
   return (
     <>
@@ -64,13 +65,16 @@ export default function Rooms() {
               room={room}
               key={room.room_id}
               onRoomAdded={(count) => setTotalRooms(totalRooms + count)}
+              onTotalPriceChanged={(amount) =>
+                setTotalPrice(totalPrice + amount)
+              }
             />
           ))}
         </Box>
 
         {/* Reservation Summary Box*/}
         <Box sx={{ flex: 1 }}>
-          <ReservationSummary totalRooms={totalRooms} />
+          <ReservationSummary totalRooms={totalRooms} totalPrice={totalPrice} />
         </Box>
       </Box>
     </>

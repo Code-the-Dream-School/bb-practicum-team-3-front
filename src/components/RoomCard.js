@@ -13,12 +13,16 @@ import CheckIcon from "@mui/icons-material/Check";
 import KingBedIcon from "@mui/icons-material/KingBed";
 import PersonIcon from "@mui/icons-material/Person";
 
-export default function RoomCard({ room, onRoomAdded }) {
+export default function RoomCard({ room, onRoomAdded, onTotalPriceChanged }) {
   const [roomNumber, setRoomNumber] = React.useState(0);
+  const [totalPrice, setTotalPrice] = React.useState(room.price);
 
   const handleChange = (event) => {
-    setRoomNumber(event.target.value);
-    onRoomAdded(event.target.value);
+    const selectedRoomNumber = event.target.value;
+    setRoomNumber(selectedRoomNumber);
+    onRoomAdded(selectedRoomNumber);
+    setTotalPrice(selectedRoomNumber * room.price);
+    onTotalPriceChanged(totalPrice);
   };
 
   return (
