@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   Table,
@@ -12,18 +13,21 @@ import {
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import fetchPersonalDetails from "../api/fetchPersonalDetails";
 
-function createData(id, firstName, lastName, email) {
-  return { id, firstName, lastName, email };
-}
-
-const rows = [
-  createData(0, "First Name:", "Maryna"),
-  createData(1, "Last Name:", "Radchenko"),
-  createData(2, "Email:", "maryna.radchenko@gmail.com"),
-];
-
 export default function PersonalDetails() {
-  const personalDetails = fetchPersonalDetails();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
+
+  useEffect(() => {
+    const fillData = async () => {
+      const user = (await fetchPersonalDetails()).user;
+      setFirstName(user.firstName);
+      setLastName(user.lastName);
+      setEmail(user.email);
+    };
+    fillData();
+  });
+
   return (
     <Container component="main">
       <Box
@@ -62,12 +66,18 @@ export default function PersonalDetails() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.firstName}</TableCell>
-                  <TableCell>{row.lastName}</TableCell>
-                </TableRow>
-              ))}
+              <TableRow>
+                <TableCell>First Name:</TableCell>
+                <TableCell>{firstName}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Last Name:</TableCell>
+                <TableCell>{lastName}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Email:</TableCell>
+                <TableCell>{email}</TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </Box>
