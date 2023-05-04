@@ -1,21 +1,15 @@
 import React from "react";
+import { Container, Box, Typography, Grid } from "@mui/material";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SearchForm from "../components/SearchForm";
+import HotelTitleInfo from "../components/HotelTitleInfo";
 import HotelImageGallery from "../components/HotelImageGallery";
+import GuestRating from "../components/GuestRating";
+import TopAmenities from "../components/TopAmenities";
 import Rooms from "../components/Rooms";
 import ReviewsCarousel from "../components/ReviewsCarousel";
-import {
-  Container,
-  Box,
-  Button,
-  Typography,
-  useMediaQuery,
-  useTheme,
-  Grid,
-  LinearProgress,
-} from "@mui/material";
-import CheckIcon from "@mui/icons-material/Check";
+import AllAmenities from "../components/AllAmenities";
 
 const hotelData = {
   name: "Club Quarters Hotel Wacker at Michigan, Chicago",
@@ -394,133 +388,23 @@ const reviews = [
 ];
 
 export default function HotelDetails() {
-  const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <>
       <Header />
       <SearchForm />
       <Container maxWidth="xl" sx={{ px: { xs: 0.5, sm: 2, md: 3 } }}>
-        {/* Header Info */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Box>
-            <Typography variant="h5" component="h1" fontWeight="600">
-              {hotelData.name}
-            </Typography>
-
-            <Typography variant="body2" component="p" color="#212A2F">
-              {hotelData.address}
-            </Typography>
-
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              {hotelData.review_score &&
-                hotelData.review_score_word &&
-                hotelData.review_number && (
-                  <>
-                    {isMatch ? (
-                      <>
-                        <Typography
-                          variant="body2"
-                          component="p"
-                          mr={0.5}
-                          sx={{
-                            fontWeight: "bold",
-                            color: "primary.main",
-                          }}
-                        >
-                          {hotelData.review_score}
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          component="p"
-                          ml={0.5}
-                          sx={{ fontWeight: "bold", color: "primary.main" }}
-                        >
-                          {hotelData.review_score_word}
-                        </Typography>
-                      </>
-                    ) : (
-                      <>
-                        <Typography
-                          variant="subtitle2"
-                          component="p"
-                          mr={0.5}
-                          px={0.3}
-                          py={0.1}
-                          sx={{
-                            color: "white",
-                            fontWeight: "bold",
-                            backgroundColor: "secondary.main",
-                            borderRadius: "5px",
-                            width: "20px",
-                            height: "20px",
-                            textAlign: "center",
-                          }}
-                        >
-                          {hotelData.review_score}
-                        </Typography>
-                        <Typography
-                          variant="subtitle2"
-                          component="p"
-                          ml={0.5}
-                          sx={{ fontWeight: "bold" }}
-                        >
-                          {hotelData.review_score_word}
-                        </Typography>
-                      </>
-                    )}
-                    <Typography variant="body2" component="p" ml={1.5}>
-                      {`(${hotelData.review_number.toLocaleString(
-                        "en-US"
-                      )} reviews)`}
-                    </Typography>
-                  </>
-                )}
-            </Box>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
-            }}
-          >
-            <Typography
-              variant="h5"
-              component="h3"
-              fontWeight="600"
-              color="green"
-            >
-              {`$${hotelData.price.toLocaleString("en-US")}`}
-            </Typography>
-            <Typography variant="body2" component="p" mt={0} color={"grey"}>
-              for {hotelData.nights}{" "}
-              {hotelData.nights === 1 ? "night" : "nights"}
-            </Typography>
-            <Button
-              //   component={ReactRouterLink}
-              variant="contained"
-              //   to="/hoteldetail"
-            >
-              Reserve
-            </Button>
-          </Box>
-        </Box>
-
+        <HotelTitleInfo hotelData={hotelData} />
         <HotelImageGallery />
 
-        <Typography variant="h6" component="h2" fontWeight="600" py={2}>
-          Overview
-        </Typography>
-        <Typography variant="body2" component="p">
-          {hotelData.overview}
-        </Typography>
+        {/* Overview */}
+        <Box>
+          <Typography variant="h6" component="h2" fontWeight="600" py={2}>
+            Overview
+          </Typography>
+          <Typography variant="body2" component="p">
+            {hotelData.overview}
+          </Typography>
+        </Box>
 
         {/* Highlights */}
         <Grid
@@ -531,177 +415,18 @@ export default function HotelDetails() {
         >
           {/* Guest Rating */}
           <Grid item xs={4}>
-            <Box
-              display="flex"
-              justifyContent="flex-start"
-              alignItems="center"
-              mb="7px"
-            >
-              <Typography
-                variant="h6"
-                component="p"
-                mr={0.8}
-                px={0.7}
-                sx={{
-                  color: "white",
-                  fontWeight: "bold",
-                  backgroundColor: "secondary.main",
-                  borderRadius: "5px",
-                  width: "30px",
-                  height: "30px",
-                  textAlign: "center",
-                }}
-              >
-                {hotelData.review_score}
-              </Typography>
-              <Typography variant="h6" component="h2" fontWeight="600" py={2}>
-                Guest Rating
-              </Typography>
-            </Box>
-
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              pt="15px"
-              pb="8px"
-            >
-              <Typography variant="body2" fontWeight="600">
-                CLEANLINESS
-              </Typography>
-              <Typography variant="body1" fontWeight="600">
-                {hotelData.cleanliness_score}
-              </Typography>
-            </Box>
-            <LinearProgress
-              variant="determinate"
-              value={hotelData.cleanliness_score * 10}
-              color="secondary"
-              sx={{ height: "6px", borderRadius: "20px", bgcolor: "grey.300" }}
-            />
-
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              pt="15px"
-              pb="8px"
-            >
-              <Typography variant="body2" fontWeight="600">
-                STAFF
-              </Typography>
-              <Typography variant="body1" fontWeight="600">
-                {hotelData.staff_score}
-              </Typography>
-            </Box>
-            <LinearProgress
-              variant="determinate"
-              value={hotelData.staff_score * 10}
-              color="secondary"
-              sx={{ height: "6px", borderRadius: "20px", bgcolor: "grey.300" }}
-            />
-
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              pt="15px"
-              pb="8px"
-            >
-              <Typography variant="body2" fontWeight="600">
-                LOCATION
-              </Typography>
-              <Typography variant="body1" fontWeight="600">
-                {hotelData.location_score}
-              </Typography>
-            </Box>
-            <LinearProgress
-              variant="determinate"
-              value={hotelData.location_score * 10}
-              color="secondary"
-              sx={{ height: "6px", borderRadius: "20px", bgcolor: "grey.300" }}
-            />
+            <GuestRating hotelData={hotelData} />
           </Grid>
 
           {/* Top Amentities */}
           <Grid item xs={8}>
-            <Typography
-              variant="h6"
-              component="h2"
-              fontWeight="600"
-              pt={2}
-              pb={6}
-            >
-              Top Amenities
-            </Typography>
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-              {hotelData.hotel_facilities_filtered
-                .slice(0, 8)
-                .map((facility, i) => {
-                  return (
-                    <Box
-                      key={i}
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        border: "1px solid #E7E7E7",
-                        py: 2.5,
-                        pl: 2,
-                        pr: 3,
-                        flexGrow: 1,
-                        maxWidth: "100%",
-                      }}
-                    >
-                      <CheckIcon sx={{ width: 25, color: "green", mr: 1.5 }} />
-                      <Typography variant="body1" component="h2">
-                        {facility}
-                      </Typography>
-                    </Box>
-                  );
-                })}
-            </Box>
+            <TopAmenities hotelData={hotelData} />
           </Grid>
         </Grid>
 
         <Rooms />
-
-        {/* Reviews Carousel */}
-        <Grid container mb={7}>
-          <Typography variant="h6" component="h2" fontWeight="600" pb={2}>
-            Reviews
-          </Typography>
-          <Grid item xs={12} md={12} lg={12}>
-            <ReviewsCarousel reviews={reviews} />
-          </Grid>
-        </Grid>
-
-        {/* All Amenities */}
-        <Typography variant="h6" component="h2" fontWeight="600" pb={2}>
-          Amenities of {hotelData.name}
-        </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            minHeight: "400px",
-            justifyContent: "space-between",
-            mb: 7,
-          }}
-        >
-          {hotelData.hotel_facilities.map((facility, i) => (
-            <Box
-              key={i}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                minWidth: "150px",
-                flexBasis: "calc(25% - 16px)",
-              }}
-            >
-              <CheckIcon sx={{ width: 20, color: "green", mr: 1 }} />
-              <Typography variant="body2" component="h2">
-                {facility}
-              </Typography>
-            </Box>
-          ))}
-        </Box>
+        <ReviewsCarousel reviews={reviews} />
+        <AllAmenities hotelData={hotelData} />
 
         {/* Hotel on the map */}
         <Box mb={7}>
