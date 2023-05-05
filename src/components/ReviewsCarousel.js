@@ -21,7 +21,7 @@ export default function ReviewsCarousel({ reviews }) {
       <Grid item xs={12} md={12} lg={12}>
         <Slider {...settings}>
           {reviews.map((review) => (
-            <Review key={review.id} review={review} />
+            <Review key={review.review_id} review={review} />
           ))}
         </Slider>
       </Grid>

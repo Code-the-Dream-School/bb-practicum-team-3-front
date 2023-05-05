@@ -2,11 +2,11 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 
-export default function AllAmenities({ hotelData }) {
+export default function AllAmenities({ facilities, name }) {
   return (
     <>
       <Typography variant="h6" component="h2" fontWeight="600" pb={2}>
-        Amenities of {hotelData.name}
+        Amenities of {name}
       </Typography>
       <Box
         sx={{
@@ -17,7 +17,7 @@ export default function AllAmenities({ hotelData }) {
           mb: 7,
         }}
       >
-        {hotelData.hotel_facilities.map((facility, i) => (
+        {facilities.map((facility, i) => (
           <Box
             key={i}
             sx={{

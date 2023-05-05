@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ImageList, ImageListItem } from "@mui/material";
 
-function srcset(image, size, rows = 1, cols = 1) {
+function srcset(image, size, rows, cols) {
   return {
     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
     srcSet: `${image}?w=${size * cols}&h=${
@@ -10,7 +10,9 @@ function srcset(image, size, rows = 1, cols = 1) {
   };
 }
 
-export default function HotelImageGallery() {
+export default function HotelImageGallery({ photos }) {
+  const restOfPhotos = photos.slice(1, 5);
+
   return (
     <ImageList
       sx={{ width: "100%", height: 504 }}
@@ -18,15 +20,22 @@ export default function HotelImageGallery() {
       cols={4}
       rowHeight={250}
     >
-      {itemData.map((item) => (
+      <ImageListItem key={photos[0].photo_id} cols={2} rows={2}>
+        <img
+          {...srcset(photos[0].url_max, 121, 2, 2)}
+          alt={"main photo"}
+          loading="lazy"
+        />
+      </ImageListItem>
+      {restOfPhotos.map((photo) => (
         <ImageListItem
-          key={item.img}
-          cols={item.cols || 1}
-          rows={item.rows || 1}
+          key={photo.photo_id}
+          // cols={1}
+          // rows={1}
         >
           <img
-            {...srcset(item.img, 121, item.rows, item.cols)}
-            alt={item.title}
+            {...srcset(photo.url_max, 121, 1, 1)}
+            alt={photo.photo_id}
             loading="lazy"
           />
         </ImageListItem>
@@ -34,28 +43,3 @@ export default function HotelImageGallery() {
     </ImageList>
   );
 }
-
-const itemData = [
-  {
-    img: "https://www.kayak.com/rimg/himg/27/ff/9a/leonardo-1077052-EXTERIOR-WACKER_0168_O-963859.jpg",
-    title: "Breakfast",
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: "https://www.kayak.com/rimg/himg/55/6c/80/leonardo-2712417-CLUB-LIVING-ROOM_CQ_WACKER_0642_O-750096.jpg",
-    title: "Burger",
-  },
-  {
-    img: "https://www.kayak.com/rimg/himg/f6/96/d9/leonardo-1077052-LOBBY_CQ_WACKER_0441_O-803377.jpg",
-    title: "Camera",
-  },
-  {
-    img: "https://www.kayak.com/rimg/himg/7e/af/99/expediav2-33448-dde95f-895335.jpg",
-    title: "Coffee",
-  },
-  {
-    img: "https://www.kayak.com/rimg/himg/03/7c/40/leonardo-1077052-1012-DELUXE-STUDIO-CORP-APARTMENT_CQ_WACKER_0359_O-506050.jpg",
-    title: "Hats",
-  },
-];

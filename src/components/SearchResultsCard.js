@@ -16,7 +16,7 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   components: {
@@ -47,6 +47,14 @@ const theme = createTheme({
 
 export default function SearchResultsCard({ hotel }) {
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    // const queryString = `?hotelId=${hotel.id}&guestNumber=${guestNumber}&roomNumber=${roomNumber}&checkinDate=${formattedCheckinDate}&checkoutDate=${formattedCheckoutDate}`;
+    const queryString = `?hotelId=${hotel.id}`;
+    navigate(`/hoteldetails${queryString}`);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -256,12 +264,7 @@ export default function SearchResultsCard({ hotel }) {
                 </Typography>
               </Box>
 
-              <Button
-                component={ReactRouterLink}
-                size="small"
-                variant="contained"
-                to="/hoteldetail"
-              >
+              <Button size="small" variant="contained" onClick={handleSubmit}>
                 See Availability
               </Button>
             </CardActions>

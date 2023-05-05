@@ -7,7 +7,14 @@ import {
   useMediaQuery,
 } from "@mui/material";
 
-export default function HotelTitleInfo({ hotelData }) {
+export default function HotelTitleInfo({
+  name,
+  review_score,
+  review_score_word,
+  address,
+  city,
+  zip,
+}) {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   return (
@@ -19,77 +26,70 @@ export default function HotelTitleInfo({ hotelData }) {
     >
       <Box>
         <Typography variant="h5" component="h1" fontWeight="600">
-          {hotelData.name}
+          {name}
         </Typography>
 
         <Typography variant="body2" component="p" color="#212A2F">
-          {hotelData.address}
+          {address}, {city}, {zip}
         </Typography>
 
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          {hotelData.review_score &&
-            hotelData.review_score_word &&
-            hotelData.review_number && (
-              <>
-                {isMatch ? (
-                  <>
-                    <Typography
-                      variant="body2"
-                      component="p"
-                      mr={0.5}
-                      sx={{
-                        fontWeight: "bold",
-                        color: "primary.main",
-                      }}
-                    >
-                      {hotelData.review_score}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      component="p"
-                      ml={0.5}
-                      sx={{ fontWeight: "bold", color: "primary.main" }}
-                    >
-                      {hotelData.review_score_word}
-                    </Typography>
-                  </>
-                ) : (
-                  <>
-                    <Typography
-                      variant="body1"
-                      component="p"
-                      mr={0.5}
-                      px={0.3}
-                      py={0.1}
-                      sx={{
-                        color: "white",
-                        fontWeight: "bold",
-                        backgroundColor: "secondary.main",
-                        borderRadius: "5px",
-                        width: "24px",
-                        height: "23px",
-                        textAlign: "center",
-                      }}
-                    >
-                      {hotelData.review_score}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      component="p"
-                      ml={0.5}
-                      sx={{ fontWeight: "bold" }}
-                    >
-                      {hotelData.review_score_word}
-                    </Typography>
-                  </>
-                )}
-                <Typography variant="body2" component="p" ml={1.5}>
-                  {`(${hotelData.review_number.toLocaleString(
-                    "en-US"
-                  )} reviews)`}
-                </Typography>
-              </>
-            )}
+          {review_score && review_score_word && (
+            <>
+              {isMatch ? (
+                <>
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    mr={0.5}
+                    sx={{
+                      fontWeight: "bold",
+                      color: "primary.main",
+                    }}
+                  >
+                    {review_score}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    ml={0.5}
+                    sx={{ fontWeight: "bold", color: "primary.main" }}
+                  >
+                    {review_score_word}
+                  </Typography>
+                </>
+              ) : (
+                <>
+                  <Typography
+                    variant="body1"
+                    component="p"
+                    mr={0.5}
+                    px={0.3}
+                    py={0.1}
+                    sx={{
+                      color: "white",
+                      fontWeight: "bold",
+                      backgroundColor: "secondary.main",
+                      borderRadius: "5px",
+                      width: "24px",
+                      height: "23px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {review_score}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    component="p"
+                    ml={0.5}
+                    sx={{ fontWeight: "bold" }}
+                  >
+                    {review_score_word}
+                  </Typography>
+                </>
+              )}
+            </>
+          )}
         </Box>
       </Box>
 
@@ -100,12 +100,12 @@ export default function HotelTitleInfo({ hotelData }) {
           alignItems: "flex-end",
         }}
       >
-        <Typography variant="h5" component="h3" fontWeight="600" color="green">
-          {`$${hotelData.price.toLocaleString("en-US")}`}
+        {/* <Typography variant="h5" component="h3" fontWeight="600" color="green">
+          {`$${price.toLocaleString("en-US")}`}
         </Typography>
         <Typography variant="body2" component="p" mt={0} color={"grey"}>
-          for {hotelData.nights} {hotelData.nights === 1 ? "night" : "nights"}
-        </Typography>
+          for {nights} {nights === 1 ? "night" : "nights"}
+        </Typography> */}
         <Button
           //   component={ReactRouterLink}
           variant="contained"

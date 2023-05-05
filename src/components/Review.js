@@ -39,18 +39,20 @@ export default function Review({ review }) {
 
   return (
     <>
-      <Card key={review.id} sx={{ height: 260, m: 1 }}>
+      <Card key={review.review_id} sx={{ height: 260, m: 1 }}>
         <CardHeader
-          avatar={<Avatar alt={review.name} src={review.avatar} />}
+          avatar={
+            <Avatar alt={review.author.name} src={review.author.avatar} />
+          }
           titleTypographyProps={{ fontWeight: 600, fontSize: ".9rem" }}
-          title={review.name}
-          subheader={review.countrycode}
+          title={review.author.name}
+          subheader={review.author.countrycode}
         />
 
         <Box sx={{ px: "16px" }}>
           <Rating
             name="read-only"
-            value={review.rating}
+            value={review.average_score}
             precision={0.5}
             size="small"
             readOnly
@@ -68,7 +70,7 @@ export default function Review({ review }) {
               textOverflow: "ellipsis",
             }}
           >
-            {review.comment}
+            {review.pros}
           </Typography>
 
           <Button
@@ -96,13 +98,13 @@ export default function Review({ review }) {
                   sx={{ p: 0 }}
                   avatar={
                     <Avatar
-                      alt={selectedReview.name}
-                      src={selectedReview.avatar}
+                      alt={selectedReview.author.name}
+                      src={selectedReview.author.avatar}
                     />
                   }
                   titleTypographyProps={{ fontWeight: 600, fontSize: "1rem" }}
-                  title={selectedReview.name}
-                  subheader={selectedReview.countrycode}
+                  title={selectedReview.author.name}
+                  subheader={selectedReview.author.countrycode}
                 />
               </Box>
 
@@ -110,7 +112,7 @@ export default function Review({ review }) {
                 <Box display="flex">
                   <Rating
                     name="read-only"
-                    value={selectedReview.rating}
+                    value={selectedReview.average_score}
                     precision={0.5}
                     size="small"
                     readOnly
@@ -131,7 +133,7 @@ export default function Review({ review }) {
                   {selectedReview.title}
                 </Typography>
 
-                {selectedReview.comment && (
+                {selectedReview.pros && (
                   <Box display="flex">
                     <MoodIcon sx={{ width: 20, color: "green", mr: 0.5 }} />
                     <Typography
@@ -140,7 +142,7 @@ export default function Review({ review }) {
                       id="modal-modal-description"
                       sx={{ pb: 2 }}
                     >
-                      {selectedReview.comment}
+                      {selectedReview.pros}
                     </Typography>
                   </Box>
                 )}

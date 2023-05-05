@@ -2,14 +2,14 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 
-export default function TopAmenities({ hotelData }) {
+export default function TopAmenities({ facilities }) {
   return (
     <>
       <Typography variant="h6" component="h2" fontWeight="600" pt={2} pb={6}>
         Top Amenities
       </Typography>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-        {hotelData.hotel_facilities_filtered.slice(0, 8).map((facility, i) => {
+        {facilities.slice(0, 8).map((facility, i) => {
           return (
             <Box
               key={i}
