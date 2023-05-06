@@ -20,7 +20,7 @@ const modalStyle = {
   width: "70%",
   maxWidth: 800,
   bgcolor: "background.paper",
-  border: "1px solid #000",
+  borderRadius: 2,
   boxShadow: 24,
   p: 4,
   m: "auto",
@@ -39,48 +39,56 @@ export default function Review({ review }) {
 
   return (
     <>
-      <Card key={review.review_id} sx={{ height: 260, m: 1 }}>
-        <CardHeader
-          avatar={
-            <Avatar alt={review.author.name} src={review.author.avatar} />
-          }
-          titleTypographyProps={{ fontWeight: 600, fontSize: ".9rem" }}
-          title={review.author.name}
-          subheader={review.author.countrycode}
-        />
-
-        <Box sx={{ px: "16px" }}>
-          <Rating
-            name="read-only"
-            value={review.average_score}
-            precision={0.5}
-            size="small"
-            readOnly
+      <Card
+        key={review.review_id}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
+          height: 260,
+          m: 1,
+        }}
+      >
+        <Box>
+          <CardHeader
+            avatar={
+              <Avatar alt={review.author.name} src={review.author.avatar} />
+            }
+            titleTypographyProps={{ fontWeight: 600, fontSize: ".9rem" }}
+            title={review.author.name}
+            subheader={review.author.countrycode}
           />
 
-          <Typography variant="body1" sx={{ pb: 1 }}>
-            {review.title}
-          </Typography>
+          <Box sx={{ px: "16px" }}>
+            <Rating
+              name="read-only"
+              value={review.average_score}
+              precision={0.5}
+              size="small"
+              readOnly
+            />
 
-          <Typography
-            variant="body2"
-            sx={{
-              maxHeight: "6em",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
-            {review.pros}
-          </Typography>
-
-          <Button
-            onClick={() => handleModalOpen(review)}
-            size="small"
-            sx={{ mt: 1 }}
-          >
-            Read More
-          </Button>
+            <Typography
+              variant="body2"
+              sx={{
+                maxHeight: "8.5em",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {review.pros}
+            </Typography>
+          </Box>
         </Box>
+
+        <Button
+          onClick={() => handleModalOpen(review)}
+          size="small"
+          sx={{ mx: "12px", mb: "12px" }}
+        >
+          Read More
+        </Button>
       </Card>
 
       {/* Modal */}

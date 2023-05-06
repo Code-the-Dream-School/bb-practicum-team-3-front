@@ -14,9 +14,10 @@ export default function Rooms({ rooms }) {
       </Typography>
       <Box sx={{ display: "flex" }} mb={7}>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3, flex: 2 }}>
-          {rooms.map((room) => (
+          {rooms.rooms.map((room) => (
             <RoomCard
               room={room}
+              rooms={rooms}
               key={room.room_id}
               onRoomAdded={(count) => setTotalRooms(totalRooms + count)}
               onTotalPriceChanged={(amount) =>
@@ -26,10 +27,15 @@ export default function Rooms({ rooms }) {
           ))}
         </Box>
 
-        {/* Reservation Summary Box*/}
-        {/* <Box sx={{ flex: 1 }}>
-          <ReservationSummary totalRooms={totalRooms} totalPrice={totalPrice} />
-        </Box> */}
+        <Box sx={{ flex: 1 }}>
+          <ReservationSummary
+            checkinDate={rooms.checkinDate}
+            checkoutDate={rooms.checkoutDate}
+            daysOfStay={rooms.daysOfStay}
+            totalRooms={totalRooms}
+            totalPrice={totalPrice}
+          />
+        </Box>
       </Box>
     </>
   );

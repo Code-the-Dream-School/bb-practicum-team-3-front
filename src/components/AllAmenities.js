@@ -12,9 +12,9 @@ export default function AllAmenities({ facilities, name }) {
         sx={{
           display: "flex",
           flexWrap: "wrap",
-          minHeight: "400px",
+          minHeight: "300px",
           justifyContent: "space-between",
-          mb: 7,
+          mb: 12,
         }}
       >
         {facilities.map((facility, i) => (

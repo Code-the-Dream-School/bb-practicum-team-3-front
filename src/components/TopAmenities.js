@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import CheckIcon from "@mui/icons-material/Check";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 export default function TopAmenities({ facilities }) {
   return (
@@ -9,7 +9,7 @@ export default function TopAmenities({ facilities }) {
         Top Amenities
       </Typography>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-        {facilities.slice(0, 8).map((facility, i) => {
+        {facilities.slice(0, 6).map((facility, i) => {
           return (
             <Box
               key={i}
@@ -24,7 +24,9 @@ export default function TopAmenities({ facilities }) {
                 maxWidth: "100%",
               }}
             >
-              <CheckIcon sx={{ width: 25, color: "green", mr: 1.5 }} />
+              <CheckCircleOutlineIcon
+                sx={{ width: 25, color: "green", mr: 1.5 }}
+              />
               <Typography variant="body1" component="h2">
                 {facility}
               </Typography>

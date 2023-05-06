@@ -13,7 +13,12 @@ import CheckIcon from "@mui/icons-material/Check";
 import KingBedIcon from "@mui/icons-material/KingBed";
 import PersonIcon from "@mui/icons-material/Person";
 
-export default function RoomCard({ room, onRoomAdded, onTotalPriceChanged }) {
+export default function RoomCard({
+  room,
+  rooms,
+  onRoomAdded,
+  onTotalPriceChanged,
+}) {
   const [roomNumber, setRoomNumber] = React.useState(0);
   const [totalPrice, setTotalPrice] = React.useState(room.price);
 
@@ -38,7 +43,7 @@ export default function RoomCard({ room, onRoomAdded, onTotalPriceChanged }) {
       <Grid container>
         <Grid item xs={12} md={4} sx={{ p: 2 }}>
           <Typography variant="h5" component="h3" sx={{ pb: 3 }}>
-            {room.roomType}
+            {room.room_type}
           </Typography>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -74,6 +79,7 @@ export default function RoomCard({ room, onRoomAdded, onTotalPriceChanged }) {
             </Box>
           ))}
         </Grid>
+
         <Grid item xs={12} md={4} sx={{ p: 2 }}>
           <Typography
             variant="h6"
@@ -90,7 +96,7 @@ export default function RoomCard({ room, onRoomAdded, onTotalPriceChanged }) {
             color="text.secondary"
             display="inline"
           >
-            for 6 nights
+            for {rooms.daysOfStay} nights
           </Typography>
 
           <Box sx={{ maxWidth: 120, mt: 2 }}>

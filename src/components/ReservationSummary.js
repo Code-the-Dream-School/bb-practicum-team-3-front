@@ -1,7 +1,13 @@
 import * as React from "react";
 import { Box, Card, Typography, Button } from "@mui/material";
 
-export default function ReservationSummary({ totalRooms, totalPrice }) {
+export default function ReservationSummary({
+  checkinDate,
+  checkoutDate,
+  daysOfStay,
+  totalRooms,
+  totalPrice,
+}) {
   return (
     <Card
       elevation={4}
@@ -25,10 +31,27 @@ export default function ReservationSummary({ totalRooms, totalPrice }) {
         </Typography>
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center">
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            // alignContent: "space-between",
+          }}
+        >
+          <Typography variant="body1" component="p">
+            {checkinDate}
+          </Typography>
+          <Typography variant="body1" component="p">
+            &rarr;
+          </Typography>
+          <Typography variant="body1" component="p">
+            {checkoutDate}
+          </Typography>
+        </Box>
         <Typography variant="body1" component="p">
           {totalRooms === 1
-            ? `${totalRooms} Room - 6 Nights`
-            : `${totalRooms} Rooms - 6 Nights`}
+            ? `${totalRooms} Room - ${daysOfStay} Nights`
+            : `${totalRooms} Rooms - ${daysOfStay} Nights`}
         </Typography>
         <Typography variant="h6" component="p" fontWeight="600" color="green">
           ${totalPrice}
