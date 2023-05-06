@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Grid,
   Box,
   List,
   ListItem,
@@ -23,80 +22,85 @@ export default function UserProfilePage() {
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Grid
-      container
-      style={{ gap: 1 }}
-      sx={{ width: "100vw", alignContent: "center", mr: "auto", ml: "auto" }}
-    >
+    <Box display="flex" flexDirection="row" flexWrap="nowrap" width="100vw">
       <Header />
       {isMatch ? (
-        <>
-          <Grid item xs={12}>
-            <Box
-              sx={{
-                bgcolor: "#F7E2AE",
-                height: "15vh",
-                mt: 6,
-                alignItems: "center",
-              }}
-            >
-              <List>
-                <ListItem
-                  component={Link}
-                  to={`/profile/personal-details`}
-                  sx={{ paddingBottom: 1, paddingTop: 1 }}
-                >
-                  <ListItemIcon sx={{ fontSize: 20 }}>
-                    <People />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Personal Details"
-                    primaryTypographyProps={{
-                      color: "primary",
-                      fontWeight: "medium",
-                      variant: "body1",
-                      fontSize: 20,
-                    }}
-                  />
-                </ListItem>
-                <Divider />
-                <ListItem
-                  component={Link}
-                  to={`/profile/reservation-details`}
-                  sx={{ paddingBottom: 3, paddingTop: 1 }}
-                >
-                  <ListItemIcon sx={{ fontSize: 20 }}>
-                    <BedroomParentIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Reservation Details"
-                    primaryTypographyProps={{
-                      color: "primary",
-                      fontWeight: "medium",
-                      variant: "body1",
-                      fontSize: 20,
-                    }}
-                  />
-                </ListItem>
-              </List>
-            </Box>
-          </Grid>
-          <Grid item xs={12}>
-            <Box sx={{ height: "100vh" }}>
-              <Routes>
-                <Route index element={<PersonalDetails />} />
-                <Route
-                  path={`/personal-details`}
-                  element={<PersonalDetails />}
+        <Box display="flex" flexDirection="column" align="center">
+          <Box
+            display="flex"
+            flexDirection="column"
+            width="100vw"
+            //maxwidth="600px"
+            sx={{
+              bgcolor: "#F7E2AE",
+              height: "15vh",
+              mt: 6,
+            }}
+          >
+            <List>
+              <ListItem
+                component={Link}
+                to={`/profile/personal-details`}
+                sx={{ paddingBottom: 1, paddingTop: 1 }}
+              >
+                <ListItemIcon sx={{ fontSize: 20 }}>
+                  <People />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Personal Details"
+                  primaryTypographyProps={{
+                    color: "primary",
+                    fontWeight: "medium",
+                    variant: "body1",
+                    fontSize: 20,
+                  }}
                 />
-                <Route
-                  path={`/reservation-details`}
-                  element={<Reservation />}
+              </ListItem>
+              <Divider />
+              <ListItem
+                component={Link}
+                to={`/profile/reservation-details`}
+                sx={{ paddingBottom: 3, paddingTop: 1 }}
+              >
+                <ListItemIcon sx={{ fontSize: 20 }}>
+                  <BedroomParentIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Reservation Details"
+                  primaryTypographyProps={{
+                    color: "primary",
+                    fontWeight: "medium",
+                    variant: "body1",
+                    fontSize: 20,
+                  }}
                 />
-              </Routes>
-            </Box>
-          </Grid>
-        </>
+              </ListItem>
+            </List>
+          </Box>
+
+          <Box
+            sx={{
+              height: "100vh",
+              width: "100wh",
+              ml: "50px",
+              mr: "50px",
+              align: "center",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <Routes>
+              {/* <Route index element={<PersonalDetails />} /> */}
+              <Route
+                index
+                path={`/personal-details`}
+                element={<PersonalDetails />}
+              />
+              <Route path={`/reservation-details`} element={<Reservation />} />
+            </Routes>
+          </Box>
+        </Box>
       ) : (
         <>
           <Box
@@ -107,7 +111,9 @@ export default function UserProfilePage() {
                 bgcolor: "#F7E2AE",
                 height: "100vh",
                 mt: 7,
-                width: "200px",
+                width: "100%",
+                minWidth: "200px",
+                maxWidth: "300px",
                 mr: "16px",
               }}
             >
@@ -160,7 +166,18 @@ export default function UserProfilePage() {
               </List>
             </Box>
 
-            <Box sx={{ height: "100vh", width: "100%" }}>
+            <Box
+              sx={{
+                height: "100vh",
+                width: "calc(100vw - 300px)",
+
+                ml: "auto",
+                mr: "auto",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
               <Routes>
                 <Route index element={<PersonalDetails />} />
                 <Route
@@ -177,6 +194,6 @@ export default function UserProfilePage() {
         </>
       )}
       <Footer />
-    </Grid>
+    </Box>
   );
 }

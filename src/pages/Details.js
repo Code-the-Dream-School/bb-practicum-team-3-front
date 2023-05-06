@@ -10,6 +10,10 @@ import {
   TableRow,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import fetchDeleteReservation from "../api/fetchDeleteReservation";
+import fetchSingleReservation from "../api/fetchSingleReservation";
+import { useState, useEffect } from "react";
+import Loading from "../components/Loading";
 
 function createData(id, item, details) {
   return { id, item, details };
@@ -32,7 +36,22 @@ function preventDefault(event) {
 }
 
 export default function PersonalDetails() {
+  const [reservation, setReservation] = useState(null);
+
+  const [isFetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    fetchSingleReservation().then((returnMessage) => {
+      setReservation(returnMessage.data);
+      setIsFetching(false);
+    });
+  }, []);
+
   const navigate = useNavigate();
+
+  const onCancelReservationHandler = async () => {
+    //await fetchDeleteReservation(reservationID);
+  };
 
   return (
     <Container component="main" maxWidth="sm">
@@ -86,7 +105,7 @@ export default function PersonalDetails() {
             color="primary"
             variant="contained"
             href="#"
-            onClick={preventDefault}
+            onClick={onCancelReservationHandler}
             sx={{ mt: 6 }}
           >
             Cancel reservation
