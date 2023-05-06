@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -17,11 +17,15 @@ import {
   Checkbox,
   FormControlLabel,
   Link,
+  Alert,
 } from "@mui/material";
 
 const theme = createTheme();
 
 export default function SignIn() {
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -34,10 +38,10 @@ export default function SignIn() {
 
     fetchSignin(submissionData).then((returnMessage) => {
       if (returnMessage.user) {
-        console.log(returnMessage);
         return navigate("/");
       } else {
-        console.log(returnMessage.error);
+        setErrorMessage(returnMessage.msg);
+        setIsError(true);
       }
     });
   };
@@ -93,6 +97,11 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            {isError ? (
+              <Alert sx={{ marginBottom: "8px" }} severity="error">
+                {errorMessage}
+              </Alert>
+            ) : null}
             <Grid container>
               <Grid item xs>
                 <Link component={ReactRouterLink} to="/forgotpassword">

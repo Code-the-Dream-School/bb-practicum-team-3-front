@@ -7,11 +7,14 @@ import Footer from "../components/Footer";
 import SearchForm from "../components/SearchForm";
 import SearchResultsCard from "../components/SearchResultsCard";
 import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 export default function SearchResultsPage() {
   const location = useLocation();
+
   const [hotelData, setHotelData] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState(true);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -29,10 +32,15 @@ export default function SearchResultsPage() {
       checkoutDate,
     };
 
-    fetchHotels(searchData).then((returnMessage) => {
-      setHotelData(returnMessage.data);
-      setIsFetching(true);
-    });
+    fetchHotels(searchData)
+      .then((returnMessage) => {
+        setHotelData(returnMessage.data);
+        setIsFetching(false);
+        setError(false);
+      })
+      .catch((error) => {
+        setIsFetching(false);
+      });
   }, [location.search]);
 
   return (
@@ -42,6 +50,10 @@ export default function SearchResultsPage() {
 
       <Container maxWidth="xl" sx={{ px: { xs: 0.5, sm: 2, md: 3 } }}>
         {isFetching ? (
+          <Loading />
+        ) : error ? (
+          <Error />
+        ) : (
           <>
             <Typography
               variant="h5"
@@ -70,8 +82,6 @@ export default function SearchResultsPage() {
               })}
             </Grid>
           </>
-        ) : (
-          <Loading />
         )}
       </Container>
       <Footer />
