@@ -11,10 +11,10 @@ import {
   TableRow,
 } from "@mui/material";
 import fetchReservationDetails from "../api/fetchReservationDetails";
-import Loading from "../components/Loading";
+import Loading from "./Loading";
 import { Link as ReactRouterLink } from "react-router-dom";
 
-export default function Reservation() {
+export default function Reservations() {
   const [reservations, setReservations] = useState([]);
 
   const [isFetching, setIsFetching] = useState(true);
@@ -84,7 +84,7 @@ export default function Reservation() {
                       <TableCell>
                         <Link
                           component={ReactRouterLink}
-                          to={`/reservation/${reservation._id}`}
+                          to={`/reservations/${reservation._id}`}
                         >
                           See details
                         </Link>

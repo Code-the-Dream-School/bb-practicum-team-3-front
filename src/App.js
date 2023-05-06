@@ -5,7 +5,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import SearchResultsPage from "./pages/SearchResultsPage";
 import UserProfilePage from "./pages/UserProfilePage";
-import Details from "./pages/Details";
+import ReservationDetails from "./pages/ReservationDetails";
 import "./index.css";
 
 export default function App() {
@@ -17,7 +17,7 @@ export default function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/searchresults" element={<SearchResultsPage />} />
         <Route path="/profile/*" element={<UserProfilePage />} />
-        <Route path="/reservation/:id" element={<Details />} />
+        <Route path="/reservations/:id" element={<ReservationDetails />} />
       </Routes>
     </BrowserRouter>
   );

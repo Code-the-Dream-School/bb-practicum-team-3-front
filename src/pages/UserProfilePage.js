@@ -12,8 +12,8 @@ import {
 import People from "@mui/icons-material/People";
 import BedroomParentIcon from "@mui/icons-material/BedroomParent";
 import { Link, Route, Routes } from "react-router-dom";
-import Reservation from "../components/Reservation";
-import PersonalDetails from "../components/PersonalDeatails";
+import Reservations from "../components/Reservations";
+import PersonalDetails from "../components/PersonalDetails";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -40,7 +40,7 @@ export default function UserProfilePage() {
             <List>
               <ListItem
                 component={Link}
-                to={`/profile/personal-details`}
+                to={`/profile/personal`}
                 sx={{ paddingBottom: 1, paddingTop: 1 }}
               >
                 <ListItemIcon sx={{ fontSize: 20 }}>
@@ -59,7 +59,7 @@ export default function UserProfilePage() {
               <Divider />
               <ListItem
                 component={Link}
-                to={`/profile/reservation-details`}
+                to={`/profile/reservations`}
                 sx={{ paddingBottom: 3, paddingTop: 1 }}
               >
                 <ListItemIcon sx={{ fontSize: 20 }}>
@@ -92,12 +92,8 @@ export default function UserProfilePage() {
           >
             <Routes>
               {/* <Route index element={<PersonalDetails />} /> */}
-              <Route
-                index
-                path={`/personal-details`}
-                element={<PersonalDetails />}
-              />
-              <Route path={`/reservation-details`} element={<Reservation />} />
+              <Route index path={`/personal`} element={<PersonalDetails />} />
+              <Route path={`/reservations`} element={<Reservations />} />
             </Routes>
           </Box>
         </Box>
@@ -120,7 +116,7 @@ export default function UserProfilePage() {
               <List>
                 <ListItem
                   component={Link}
-                  to={`/profile/personal-details`}
+                  to={`/profile/personal`}
                   sx={{
                     mt: 5,
                     "&:hover": {
@@ -143,7 +139,7 @@ export default function UserProfilePage() {
                 </ListItem>
                 <ListItem
                   component={Link}
-                  to={`/profile/reservation-details`}
+                  to={`/profile/reservations`}
                   sx={{
                     "&:hover": {
                       bgcolor: "#F7CD8F",
@@ -180,14 +176,8 @@ export default function UserProfilePage() {
             >
               <Routes>
                 <Route index element={<PersonalDetails />} />
-                <Route
-                  path={`/personal-details`}
-                  element={<PersonalDetails />}
-                />
-                <Route
-                  path={`/reservation-details`}
-                  element={<Reservation />}
-                />
+                <Route path={`/personal`} element={<PersonalDetails />} />
+                <Route path={`/reservations`} element={<Reservations />} />
               </Routes>
             </Box>
           </Box>

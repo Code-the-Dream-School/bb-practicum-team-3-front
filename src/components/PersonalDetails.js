@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import fetchPersonalDetails from "../api/fetchPersonalDetails";
-import Loading from "../components/Loading";
+import Loading from "./Loading";
 
 export default function PersonalDetails() {
   const [user, setUser] = useState(null);

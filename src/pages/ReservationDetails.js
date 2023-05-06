@@ -35,7 +35,7 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function PersonalDetails() {
+export default function ReservationDetails() {
   const [reservation, setReservation] = useState(null);
 
   const [isFetching, setIsFetching] = useState(true);
