@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 import {
   Table,
@@ -8,10 +8,11 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  Container,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import fetchPersonalDetails from "../api/fetchPersonalDetails";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 
 export default function PersonalDetails() {
   const [user, setUser] = useState(null);
@@ -25,27 +26,27 @@ export default function PersonalDetails() {
   }, []);
 
   return (
-    <Box
-      sx={{
-        flexWrap: "wrap",
-        marginTop: "100px",
-        marginBottom: "50px",
-        display: "inline-block",
-        align: "center",
-      }}
-    >
+    <Container maxWidth="md">
       {isFetching ? (
         <Loading />
       ) : (
-        <>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            flexWrap: "nowrap",
+            marginTop: "80px",
+            marginBottom: "50px",
+          }}
+        >
           <Typography
-            component="h1"
+            component="h2"
             variant="h3"
-            color="primary"
+            color="black"
             gutterBottom
             align="center"
           >
-            Personal details
+            Personal Details
           </Typography>
           <AccountCircleIcon
             sx={{
@@ -56,32 +57,33 @@ export default function PersonalDetails() {
               pt: 2,
             }}
           />
-          <Box sx={{ flexGrow: 1 }}>
-            <Table size="medium">
-              <TableHead>
-                <TableRow>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>First Name:</TableCell>
-                  <TableCell>{user.firstName}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Last Name:</TableCell>
-                  <TableCell>{user.lastName}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Email:</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </Box>
-        </>
+          <Table size="medium">
+            <TableHead>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              <TableRow>
+                <TableCell>First Name</TableCell>
+                <TableCell>{user.firstName}</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell>Last Name</TableCell>
+                <TableCell>{user.lastName}</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell>Email</TableCell>
+                <TableCell>{user.email}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Box>
       )}
-    </Box>
+    </Container>
   );
 }

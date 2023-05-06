@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { Container, Box, useMediaQuery, useTheme } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import Reservations from "../components/Reservations";
 import PersonalDetails from "../components/PersonalDetails";
@@ -12,60 +12,37 @@ export default function UserProfilePage() {
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Box display="flex" flexDirection="row" flexWrap="nowrap" width="100vw">
+    <>
       <Header />
-      {isMatch ? (
-        <Box display="flex" flexDirection="column" align="center">
-          <UserProfileNav isMatch={isMatch} />
+      <Container maxWidth="xl" sx={{ px: { xs: 0.5, sm: 2, md: 3 } }}>
+        {isMatch ? (
+          <Box display="flex" flexDirection="column" justifyContent="center">
+            <UserProfileNav isMatch={isMatch} />
 
-          <Box
-            sx={{
-              height: "100vh",
-              width: "100wh",
-              ml: "50px",
-              mr: "50px",
-              align: "center",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
             <Routes>
-              {/* <Route index element={<PersonalDetails />} /> */}
-              <Route index path={`/personal`} element={<PersonalDetails />} />
+              <Route index element={<PersonalDetails />} />
+              <Route path={`/personal`} element={<PersonalDetails />} />
               <Route path={`/reservations`} element={<Reservations />} />
             </Routes>
           </Box>
-        </Box>
-      ) : (
-        <>
+        ) : (
           <Box
-            sx={{ display: "flex", flexDirection: "row", flexWrap: "nowrap" }}
+            display="flex"
+            flexDirection="row"
+            flexWrap="nowrap"
+            justifyContent="center"
           >
             <UserProfileNav isMatch={isMatch} />
 
-            <Box
-              sx={{
-                height: "100vh",
-                width: "calc(100vw - 300px)",
-
-                ml: "auto",
-                mr: "auto",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
-            >
-              <Routes>
-                <Route index element={<PersonalDetails />} />
-                <Route path={`/personal`} element={<PersonalDetails />} />
-                <Route path={`/reservations`} element={<Reservations />} />
-              </Routes>
-            </Box>
+            <Routes>
+              <Route index element={<PersonalDetails />} />
+              <Route path={`/personal`} element={<PersonalDetails />} />
+              <Route path={`/reservations`} element={<Reservations />} />
+            </Routes>
           </Box>
-        </>
-      )}
+        )}
+      </Container>
       <Footer />
-    </Box>
+    </>
   );
 }
