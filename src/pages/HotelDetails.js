@@ -57,7 +57,7 @@ export default function HotelDetails() {
       });
 
     fetchRooms().then((returnMessage) => {
-      setRooms(returnMessage.rooms);
+      setRooms(returnMessage.data);
       setIsFetching(true);
     });
   }, []);

@@ -29,9 +29,9 @@ export default function Rooms({ rooms }) {
 
         <Box sx={{ flex: 1 }}>
           <ReservationSummary
-            checkinDate={rooms.checkinDate}
-            checkoutDate={rooms.checkoutDate}
-            daysOfStay={rooms.daysOfStay}
+            checkin_date={rooms.checkin_date}
+            checkout_date={rooms.checkout_date}
+            days_of_stay={rooms.days_of_stay}
             totalRooms={totalRooms}
             totalPrice={totalPrice}
           />

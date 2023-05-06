@@ -22,6 +22,10 @@ export default function RoomCard({
   const [roomNumber, setRoomNumber] = React.useState(0);
   const [totalPrice, setTotalPrice] = React.useState(room.price);
 
+  const formattedPrice = parseInt(room.price.toFixed(0)).toLocaleString(
+    "en-US"
+  );
+
   const handleChange = (event) => {
     const selectedRoomNumber = event.target.value;
     setRoomNumber(selectedRoomNumber);
@@ -88,7 +92,7 @@ export default function RoomCard({
             color="green"
             display="inline"
           >
-            ${room.price}{" "}
+            ${formattedPrice}{" "}
           </Typography>
           <Typography
             variant="subtitle1"
