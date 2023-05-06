@@ -6,7 +6,6 @@ import SignUp from "./pages/SignUp";
 import SearchResultsPage from "./pages/SearchResultsPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import ReservationDetails from "./pages/ReservationDetails";
-import "./index.css";
 
 export default function App() {
   return (
