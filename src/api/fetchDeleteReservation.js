@@ -1,6 +1,6 @@
-export default async function fetchDeleteReservation(reservationID) {
+export default async function fetchDeleteReservation(reservationId) {
   const res = await fetch(
-    `${process.env.REACT_APP_BASE_URL}/reservations/${reservationID}`,
+    `${process.env.REACT_APP_BASE_URL}/reservations/${reservationId}`,
     {
       method: "DELETE",
       credentials: "include",

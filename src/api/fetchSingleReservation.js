@@ -1,6 +1,6 @@
-export default async function fetchSingleReservation() {
+export default async function fetchSingleReservation(reservationId) {
   const res = await fetch(
-    `${process.env.REACT_APP_BASE_URL}/reservations/64558adaeda6b4dd91e98f3c`,
+    `${process.env.REACT_APP_BASE_URL}/reservations/${reservationId}`,
     {
       method: "GET",
       credentials: "include",

@@ -83,7 +83,7 @@ export default function Reservations() {
                     <TableCell>
                       <Link
                         component={ReactRouterLink}
-                        to={`/reservations/${reservation._id}`}
+                        to={`/profile/reservations/${reservation._id}`}
                       >
                         See details
                       </Link>

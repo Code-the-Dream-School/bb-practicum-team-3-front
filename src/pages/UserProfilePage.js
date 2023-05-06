@@ -6,6 +6,7 @@ import PersonalDetails from "../components/PersonalDetails";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import UserProfileNav from "../components/UserProfileNav";
+import ReservationDetails from "../pages/ReservationDetails";
 
 export default function UserProfilePage() {
   const theme = useTheme();
@@ -23,6 +24,10 @@ export default function UserProfilePage() {
               <Route index element={<PersonalDetails />} />
               <Route path={`/personal`} element={<PersonalDetails />} />
               <Route path={`/reservations`} element={<Reservations />} />
+              <Route
+                path={`/reservations/:id`}
+                element={<ReservationDetails />}
+              />
             </Routes>
           </Box>
         ) : (
@@ -38,6 +43,10 @@ export default function UserProfilePage() {
               <Route index element={<PersonalDetails />} />
               <Route path={`/personal`} element={<PersonalDetails />} />
               <Route path={`/reservations`} element={<Reservations />} />
+              <Route
+                path={`/reservations/:reservationId`}
+                element={<ReservationDetails />}
+              />
             </Routes>
           </Box>
         )}

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Box,
@@ -9,10 +10,13 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import {
+  useParams,
+  useNavigate,
+  Link as ReactRouterLink,
+} from "react-router-dom";
 import fetchDeleteReservation from "../api/fetchDeleteReservation";
 import fetchSingleReservation from "../api/fetchSingleReservation";
-import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 
 function createData(id, item, details) {
@@ -31,84 +35,90 @@ const rows = [
   createData(7, "Total price:", "567.90"),
 ];
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
 export default function ReservationDetails() {
-  const [reservation, setReservation] = useState(null);
-
-  const [isFetching, setIsFetching] = useState(true);
-
-  useEffect(() => {
-    fetchSingleReservation().then((returnMessage) => {
-      setReservation(returnMessage.data);
-      setIsFetching(false);
-    });
-  }, []);
+  const { reservationId } = useParams();
 
   const navigate = useNavigate();
 
+  const [reservation, setReservation] = useState(null);
+  const [isFetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    fetchSingleReservation(reservationId).then((returnMessage) => {
+      setReservation(returnMessage.data);
+      setIsFetching(false);
+    });
+  }, [reservationId]);
+
   const onCancelReservationHandler = async () => {
     //await fetchDeleteReservation(reservationID);
+    return navigate("/profile/reservations");
   };
 
   return (
-    <Container component="main" maxWidth="sm">
-      <Button
-        color="primary"
-        variant="outlined"
-        href="#"
-        onClick={() => navigate(-1)}
-        sx={{ mt: 3 }}
-      >
-        Return to reservation overview
-      </Button>
-
+    <Container maxWidth="md" sx={{ marginLeft: "0px", marginRight: "0px" }}>
       <Box
         sx={{
           display: "flex",
-          flexWrap: "wrap",
-          marginTop: "100px",
+          flexDirection: "column",
+          flexWrap: "nowrap",
+          marginTop: "80px",
           marginBottom: "50px",
         }}
       >
         <Typography
-          component="h1"
+          component="h2"
           variant="h3"
-          color="primary"
+          color="black"
           gutterBottom
           align="center"
+          marginBottom="0px"
         >
-          Reservation details
+          Reservation Details
         </Typography>
-        <Box sx={{ flexGrow: 1 }}>
-          <Table size="medium">
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
 
-                <TableCell></TableCell>
+        <Table size="medium">
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.item}</TableCell>
+                <TableCell>{row.details}</TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.item}</TableCell>
-                  <TableCell>{row.details}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+            ))}
+          </TableBody>
+        </Table>
 
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent="flex-end"
+          sx={{ marginTop: "16px", marginBottom: "50px" }}
+        >
           <Button
             color="primary"
+            size="small"
             variant="contained"
-            href="#"
             onClick={onCancelReservationHandler}
-            sx={{ mt: 6 }}
+            sx={{ marginRight: "10px" }}
           >
             Cancel reservation
+          </Button>
+
+          <Button
+            component={ReactRouterLink}
+            color="primary"
+            size="small"
+            variant="text"
+            to="/profile/reservations"
+          >
+            Return to reservation overview
           </Button>
         </Box>
       </Box>
