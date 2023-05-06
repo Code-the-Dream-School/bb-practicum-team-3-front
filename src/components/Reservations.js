@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Box,
@@ -11,9 +10,9 @@ import {
   TableRow,
   Container,
 } from "@mui/material";
+import { Link as ReactRouterLink } from "react-router-dom";
 import fetchReservationDetails from "../api/fetchReservationDetails";
 import Loading from "./Loading";
-import { Link as ReactRouterLink } from "react-router-dom";
 
 export default function Reservations() {
   const [reservations, setReservations] = useState([]);
@@ -28,7 +27,7 @@ export default function Reservations() {
   }, []);
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ marginLeft: "0px", marginRight: "0px" }}>
       {isFetching ? (
         <Loading />
       ) : reservations.length === 0 ? (
