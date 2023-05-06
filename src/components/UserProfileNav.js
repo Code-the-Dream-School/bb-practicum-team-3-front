@@ -13,120 +13,116 @@ import { Link } from "react-router-dom";
 
 export default function UserProfileNav({ isMatch }) {
   return (
-    <>
+    <Box
+      sx={{
+        height: "100%",
+        width: "100%",
+        maxWidth: "300px",
+        ...(isMatch && {
+          maxWidth: "100vw",
+        }),
+        mt: "80px",
+        border: "solid 1px #d8d8d8",
+        borderRadius: "8px",
+      }}
+    >
       {isMatch ? (
-        <Box
-          display="flex"
-          flexDirection="column"
-          width="100vw"
-          //maxwidth="600px"
-          sx={{
-            bgcolor: "#F7E2AE",
-            height: "15vh",
-            mt: 6,
-          }}
-        >
-          <List>
-            <ListItem
-              component={Link}
-              to={`/profile/personal`}
-              sx={{ paddingBottom: 1, paddingTop: 1 }}
-            >
-              <ListItemIcon sx={{ fontSize: 20 }}>
-                <People />
-              </ListItemIcon>
-              <ListItemText
-                primary="Personal Details"
-                primaryTypographyProps={{
-                  color: "primary",
-                  fontWeight: "medium",
-                  variant: "body1",
-                  fontSize: 20,
-                }}
-              />
-            </ListItem>
-            <Divider />
-            <ListItem
-              component={Link}
-              to={`/profile/reservations`}
-              sx={{ paddingBottom: 3, paddingTop: 1 }}
-            >
-              <ListItemIcon sx={{ fontSize: 20 }}>
-                <BedroomParentIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Reservation Details"
-                primaryTypographyProps={{
-                  color: "primary",
-                  fontWeight: "medium",
-                  variant: "body1",
-                  fontSize: 20,
-                }}
-              />
-            </ListItem>
-          </List>
-        </Box>
+        <List>
+          <ListItem
+            component={Link}
+            to={`/profile/personal`}
+            sx={{
+              "&:hover": {
+                bgcolor: "#F7CD8F",
+              },
+            }}
+          >
+            <ListItemIcon sx={{ fontSize: 20 }}>
+              <People />
+            </ListItemIcon>
+            <ListItemText
+              primary="Personal Details"
+              primaryTypographyProps={{
+                color: "primary",
+                fontWeight: "medium",
+                variant: "body1",
+                fontSize: 20,
+              }}
+            />
+          </ListItem>
+          <Divider />
+          <ListItem
+            component={Link}
+            to={`/profile/reservations`}
+            sx={{
+              "&:hover": {
+                bgcolor: "#F7CD8F",
+              },
+            }}
+          >
+            <ListItemIcon sx={{ fontSize: 20 }}>
+              <BedroomParentIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Reservation Details"
+              primaryTypographyProps={{
+                color: "primary",
+                fontWeight: "medium",
+                variant: "body1",
+                fontSize: 20,
+              }}
+            />
+          </ListItem>
+        </List>
       ) : (
-        <Box
-          sx={{
-            bgcolor: "#F7E2AE",
-            height: "100vh",
-            mt: 7,
-            width: "100%",
-            minWidth: "200px",
-            maxWidth: "300px",
-            mr: "16px",
-          }}
-        >
-          <List>
-            <ListItem
-              component={Link}
-              to={`/profile/personal`}
-              sx={{
-                mt: 5,
-                "&:hover": {
-                  bgcolor: "#F7CD8F",
-                },
+        <List>
+          <ListItem
+            component={Link}
+            to={`/profile/personal`}
+            sx={{
+              "&:hover": {
+                bgcolor: "#F7CD8F",
+              },
+            }}
+          >
+            <ListItemIcon sx={{ fontSize: 20 }}>
+              <People />
+            </ListItemIcon>
+            <ListItemText
+              primary="Personal Details"
+              primaryTypographyProps={{
+                color: "primary",
+                fontWeight: "medium",
+                variant: "body1",
+                fontSize: 20,
               }}
-            >
-              <ListItemIcon sx={{ fontSize: 20 }}>
-                <People />
-              </ListItemIcon>
-              <ListItemText
-                primary="Personal Details"
-                primaryTypographyProps={{
-                  color: "primary",
-                  fontWeight: "medium",
-                  variant: "body1",
-                  fontSize: 20,
-                }}
-              />
-            </ListItem>
-            <ListItem
-              component={Link}
-              to={`/profile/reservations`}
-              sx={{
-                "&:hover": {
-                  bgcolor: "#F7CD8F",
-                },
+            />
+          </ListItem>
+          <Divider />
+          <ListItem
+            component={Link}
+            to={`/profile/reservations`}
+            sx={{
+              "&:hover": {
+                bgcolor: "#F7CD8F",
+              },
+            }}
+          >
+            <ListItemIcon sx={{ fontSize: 20 }}>
+              <BedroomParentIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Reservation Details"
+              primaryTypographyProps={{
+                color: "primary",
+                fontWeight: "medium",
+                variant: "body1",
+                fontSize: 20,
               }}
-            >
-              <ListItemIcon sx={{ fontSize: 20 }}>
-                <BedroomParentIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Reservation Details"
-                primaryTypographyProps={{
-                  color: "primary",
-                  fontWeight: "medium",
-                  variant: "body1",
-                  fontSize: 20,
-                }}
-              />
-            </ListItem>
-          </List>
-        </Box>
+            />
+          </ListItem>
+        </List>
       )}
-    </>
+    </Box>
   );
 }
