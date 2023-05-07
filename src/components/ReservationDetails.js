@@ -42,7 +42,7 @@ export default function ReservationDetails() {
   }, [reservationId]);
 
   const onCancelReservationHandler = async () => {
-    //await fetchDeleteReservation(reservationID);
+    await fetchDeleteReservation(reservationId);
     return navigate("/profile/reservations");
   };
 
