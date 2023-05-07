@@ -191,7 +191,7 @@ export default function Header() {
                   component={ReactRouterLink}
                   sx={{ marginLeft: "auto" }}
                   variant="contained"
-                  to="/userprofile"
+                  to="/profile"
                 >
                   PROFILE
                 </Button>
