@@ -39,52 +39,72 @@ export default function RoomCard({
       elevation={4}
       sx={{
         minHeight: { xs: 200, sm: 220, md: 220 },
-        borderRadius: "14px",
+        borderRadius: "8px",
         display: "flex",
-        flexDirection: "row",
+        // flexWrap: "nowrap",
+        // flexDirection: { xs: "column", sm: "row", md: "row" },
       }}
     >
       <Grid container>
-        <Grid item xs={12} md={4} sx={{ p: 2 }}>
+        <Grid item xs={12} sm={4} md={4} sx={{ p: 2 }}>
           <Typography variant="h5" component="h3" sx={{ pb: 3 }}>
             {room.room_type}
           </Typography>
 
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <KingBedIcon sx={{ mr: 0.5 }} />
-            <Typography
-              variant="subtitle1"
-              component="p"
-              color="text.secondary"
-            >
-              {room.bedType}
-            </Typography>
-          </Box>
+          <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+            <Box sx={{ display: "flex", alignItems: "center", pr: 2 }}>
+              <KingBedIcon sx={{ mr: 0.5 }} />
+              <Typography
+                variant="subtitle1"
+                component="p"
+                color="text.secondary"
+              >
+                {room.bedType}
+              </Typography>
+            </Box>
 
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <PersonIcon />
-            <Typography
-              variant="subtitle1"
-              component="p"
-              color="text.secondary"
-              sx={{ pl: 0.5 }}
-            >
-              Sleeps up to {room.sleeps}
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <PersonIcon />
+              <Typography
+                variant="subtitle1"
+                component="p"
+                color="text.secondary"
+                sx={{ pl: 0.5 }}
+              >
+                Sleeps up to {room.sleeps}
+              </Typography>
+            </Box>
           </Box>
         </Grid>
-        <Grid item xs={12} md={4} sx={{ p: 2 }}>
+        <Grid
+          item
+          xs={12}
+          sm={4}
+          md={4}
+          sx={{
+            p: 2,
+            display: "flex",
+            flexDirection: { xs: "row", sm: "column", md: "column" },
+            flexWrap: "wrap",
+          }}
+        >
           {room.amenities.map((amenity, index) => (
-            <Box key={index} sx={{ display: "flex", alignItems: "center" }}>
+            <Box
+              key={index}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <CheckIcon sx={{ width: 18, color: "green", mr: 0.5 }} />
-              <Typography variant="subtitle1" component="p">
+              <Typography variant="body2" component="p">
                 {amenity}
               </Typography>
             </Box>
           ))}
         </Grid>
 
-        <Grid item xs={12} md={4} sx={{ p: 2 }}>
+        <Grid item xs={12} sm={4} md={4} sx={{ p: 2 }}>
           <Typography
             variant="h6"
             component="p"

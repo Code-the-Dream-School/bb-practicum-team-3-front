@@ -104,7 +104,7 @@ export default function HotelDetails() {
               mb={1}
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={12} md={4}>
                 <GuestRating
                   reviewScore={hotelData.review_score}
                   cleanliness={guestRating.cleanliness_score}
@@ -113,24 +113,31 @@ export default function HotelDetails() {
                   location={guestRating.location_score}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={12} md={4}>
                 <TopAmenities facilities={hotelData.hotel_facilities} />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={12} md={4}>
                 <Box>
                   <Typography
                     variant="h6"
                     component="h2"
                     fontWeight="600"
-                    py={2}
+                    sx={{
+                      pb: { xs: 2, sm: 2, md: 6 },
+                      pt: { xs: 2, sm: 4, md: 2 },
+                    }}
                   >
                     Neighborhood
                   </Typography>
                   <Box
                     display="flex"
                     justifyContent="center"
-                    mt={3.7}
-                    sx={{ width: "100%", height: "216px", overflow: "hidden" }}
+                    sx={{
+                      width: "100%",
+                      height: { sm: "100%", md: "193px" },
+                      overflow: "hidden",
+                      mt: { sm: 0.3, md: 0, lg: 0 },
+                    }}
                   >
                     <img
                       src={mapPreview.map_preview_url}

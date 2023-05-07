@@ -16,11 +16,12 @@ export default function ReservationSummary({
     <Card
       elevation={4}
       sx={{
-        //   minHeight: { xs: 200, sm: 220, md: 220 },
-        height: 190,
-        width: "60%",
+        minHeight: 190,
+        width: { xs: "100%", sm: "100%", md: "90%", lg: "70%" },
         mx: "auto",
-        borderRadius: "14px",
+        borderRadius: "8px",
+        position: "sticky",
+        top: "90px",
       }}
     >
       <Box
@@ -31,15 +32,17 @@ export default function ReservationSummary({
         sx={{ height: 50 }}
       >
         <Typography variant="h6" component="p" fontWeight="600">
-          Your reservation details
+          Reservation Details
         </Typography>
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center">
         <Box
-          style={{
+          sx={{
             display: "flex",
             flexDirection: "row",
             // alignContent: "space-between",
+            gap: 3,
+            mt: 2,
           }}
         >
           <Typography variant="body1" component="p">
@@ -52,17 +55,24 @@ export default function ReservationSummary({
             {checkout_date}
           </Typography>
         </Box>
-        <Typography variant="body1" component="p">
+
+        <Typography variant="body1" component="p" fontWeight={600} mt={2}>
           {`${totalRooms} ${
             totalRooms === 1 ? "Room" : "Rooms"
           } - ${days_of_stay} ${days_of_stay === 1 ? "Night" : "Nights"}`}
         </Typography>
 
-        <Typography variant="h6" component="p" fontWeight="600" color="green">
+        <Typography
+          variant="h6"
+          component="p"
+          fontWeight="600"
+          color="green"
+          my={2}
+        >
           ${formattedTotalPrice}
         </Typography>
       </Box>
-      <Box display="flex" flexDirection="column">
+      <Box display="flex" flexDirection="column" mx={2} mb={2}>
         <Button variant="contained">Reserve</Button>
       </Box>
     </Card>

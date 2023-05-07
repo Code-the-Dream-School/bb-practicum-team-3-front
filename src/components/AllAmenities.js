@@ -22,9 +22,9 @@ export default function AllAmenities({ facilities, name }) {
             key={i}
             sx={{
               display: "flex",
-              alignItems: "center",
+              alignItems: "flex-start",
               minWidth: "150px",
-              flexBasis: "calc(25% - 16px)",
+              flexBasis: { xs: "50%", sm: "50%", md: "calc(25% - 16px)" },
             }}
           >
             <CheckIcon sx={{ width: 20, color: "green", mr: 1 }} />

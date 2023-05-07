@@ -6,6 +6,7 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
+import { HashLink as Link } from "react-router-hash-link";
 
 export default function HotelTitleInfo({
   name,
@@ -99,7 +100,7 @@ export default function HotelTitleInfo({
 
       <Box
         sx={{
-          display: "flex",
+          display: { xs: "none", sm: "flex" },
           flexDirection: "column",
           alignItems: "flex-end",
         }}
@@ -110,13 +111,10 @@ export default function HotelTitleInfo({
         <Typography variant="body2" component="p" mt={0} color={"grey"}>
           for {days_of_stay} {days_of_stay === 1 ? "night" : "nights"}
         </Typography>
-        <Button
-          //   component={ReactRouterLink}
-          variant="contained"
-          //   to="/hoteldetail"
-        >
-          Reserve
-        </Button>
+
+        <Link to="#rooms" smooth style={{ textDecoration: "none" }}>
+          <Button variant="contained">Reserve</Button>
+        </Link>
       </Box>
     </Box>
   );

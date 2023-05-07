@@ -9,10 +9,24 @@ export default function Rooms({ rooms }) {
 
   return (
     <>
-      <Typography variant="h6" component="h2" fontWeight="600" py={2}>
+      <Typography
+        id="rooms"
+        variant="h6"
+        component="h2"
+        fontWeight="600"
+        py={2}
+      >
         Availability
       </Typography>
-      <Box sx={{ display: "flex" }} mb={7}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", sm: "column", md: "row", lg: "row" },
+          gap: { xs: 2, sm: 3 },
+        }}
+        mb={7}
+        minHeight={500}
+      >
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3, flex: 2 }}>
           {rooms.rooms.map((room) => (
             <RoomCard

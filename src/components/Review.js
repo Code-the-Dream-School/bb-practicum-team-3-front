@@ -100,10 +100,13 @@ export default function Review({ review }) {
       >
         <Box sx={modalStyle}>
           {selectedReview && (
-            <Box display="flex">
+            <Box
+              display="flex"
+              sx={{ flexDirection: { xs: "column", sm: "column", md: "row" } }}
+            >
               <Box flex="1">
                 <CardHeader
-                  sx={{ p: 0 }}
+                  sx={{ p: 0, mb: 2 }}
                   avatar={
                     <Avatar
                       alt={selectedReview.author.name}
