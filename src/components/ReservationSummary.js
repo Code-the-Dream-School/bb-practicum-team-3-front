@@ -53,10 +53,11 @@ export default function ReservationSummary({
           </Typography>
         </Box>
         <Typography variant="body1" component="p">
-          {totalRooms === 1
-            ? `${totalRooms} Room - ${days_of_stay} Nights`
-            : `${totalRooms} Rooms - ${days_of_stay} Nights`}
+          {`${totalRooms} ${
+            totalRooms === 1 ? "Room" : "Rooms"
+          } - ${days_of_stay} ${days_of_stay === 1 ? "Night" : "Nights"}`}
         </Typography>
+
         <Typography variant="h6" component="p" fontWeight="600" color="green">
           ${formattedTotalPrice}
         </Typography>

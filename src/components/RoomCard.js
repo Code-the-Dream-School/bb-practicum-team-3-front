@@ -100,7 +100,8 @@ export default function RoomCard({
             color="text.secondary"
             display="inline"
           >
-            for {rooms.daysOfStay} nights
+            for {rooms.days_of_stay}{" "}
+            {rooms.days_of_stay === 1 ? "night" : "nights"}
           </Typography>
 
           <Box sx={{ maxWidth: 120, mt: 2 }}>

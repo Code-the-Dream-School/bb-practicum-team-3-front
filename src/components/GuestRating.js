@@ -1,15 +1,16 @@
 import React from "react";
 import { Box, Typography, LinearProgress } from "@mui/material";
 
-export default function GuestRating({ hotelData }) {
+export default function GuestRating({
+  reviewScore,
+  cleanliness,
+  comfort,
+  staff,
+  location,
+}) {
   return (
     <>
-      <Box
-        display="flex"
-        justifyContent="flex-start"
-        alignItems="center"
-        mb="7px"
-      >
+      <Box display="flex" justifyContent="flex-start" alignItems="center">
         <Typography
           variant="h6"
           component="p"
@@ -25,7 +26,7 @@ export default function GuestRating({ hotelData }) {
             textAlign: "center",
           }}
         >
-          {hotelData.review_score}
+          {reviewScore}
         </Typography>
         <Typography variant="h6" component="h2" fontWeight="600" py={2}>
           Guest Rating
@@ -37,12 +38,27 @@ export default function GuestRating({ hotelData }) {
           CLEANLINESS
         </Typography>
         <Typography variant="body1" fontWeight="600">
-          {hotelData.cleanliness_score}
+          {cleanliness}
         </Typography>
       </Box>
       <LinearProgress
         variant="determinate"
-        value={hotelData.cleanliness_score * 10}
+        value={cleanliness * 10}
+        color="secondary"
+        sx={{ height: "6px", borderRadius: "20px", bgcolor: "grey.300" }}
+      />
+
+      <Box display="flex" justifyContent="space-between" pt="15px" pb="8px">
+        <Typography variant="body2" fontWeight="600">
+          COMFORT
+        </Typography>
+        <Typography variant="body1" fontWeight="600">
+          {comfort}
+        </Typography>
+      </Box>
+      <LinearProgress
+        variant="determinate"
+        value={comfort * 10}
         color="secondary"
         sx={{ height: "6px", borderRadius: "20px", bgcolor: "grey.300" }}
       />
@@ -52,12 +68,12 @@ export default function GuestRating({ hotelData }) {
           STAFF
         </Typography>
         <Typography variant="body1" fontWeight="600">
-          {hotelData.staff_score}
+          {staff}
         </Typography>
       </Box>
       <LinearProgress
         variant="determinate"
-        value={hotelData.staff_score * 10}
+        value={staff * 10}
         color="secondary"
         sx={{ height: "6px", borderRadius: "20px", bgcolor: "grey.300" }}
       />
@@ -67,12 +83,12 @@ export default function GuestRating({ hotelData }) {
           LOCATION
         </Typography>
         <Typography variant="body1" fontWeight="600">
-          {hotelData.location_score}
+          {location}
         </Typography>
       </Box>
       <LinearProgress
         variant="determinate"
-        value={hotelData.location_score * 10}
+        value={location * 10}
         color="secondary"
         sx={{ height: "6px", borderRadius: "20px", bgcolor: "grey.300" }}
       />

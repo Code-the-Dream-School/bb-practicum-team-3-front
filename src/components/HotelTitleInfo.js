@@ -14,9 +14,13 @@ export default function HotelTitleInfo({
   address,
   city,
   zip,
+  days_of_stay,
+  price,
 }) {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const formattedPrice = parseInt(price.toFixed(0)).toLocaleString("en-US");
+
   return (
     <Box
       sx={{
@@ -100,12 +104,12 @@ export default function HotelTitleInfo({
           alignItems: "flex-end",
         }}
       >
-        {/* <Typography variant="h5" component="h3" fontWeight="600" color="green">
-          {`$${price.toLocaleString("en-US")}`}
+        <Typography variant="h5" component="h3" fontWeight="600" color="green">
+          ${formattedPrice}
         </Typography>
         <Typography variant="body2" component="p" mt={0} color={"grey"}>
-          for {nights} {nights === 1 ? "night" : "nights"}
-        </Typography> */}
+          for {days_of_stay} {days_of_stay === 1 ? "night" : "nights"}
+        </Typography>
         <Button
           //   component={ReactRouterLink}
           variant="contained"

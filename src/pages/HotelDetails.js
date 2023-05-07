@@ -22,6 +22,7 @@ export default function HotelDetails() {
   const [hotelData, setHotelData] = useState(null);
   const [mapPreview, setMapPreview] = useState(null);
   const [photos, setPhotos] = useState(null);
+  const [guestRating, setGuestRating] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [rooms, setRooms] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
@@ -47,6 +48,7 @@ export default function HotelDetails() {
       .then((returnMessage) => {
         setHotelData(returnMessage.hotel_data);
         setPhotos(returnMessage.photos);
+        setGuestRating(returnMessage.review_scores);
         setReviews(returnMessage.reviews);
         setMapPreview(returnMessage.map_preview);
         setIsFetching(false);
@@ -80,6 +82,8 @@ export default function HotelDetails() {
               address={hotelData.address}
               city={hotelData.city}
               zip={hotelData.zip}
+              days_of_stay={rooms.days_of_stay}
+              price={rooms.rooms[0].price}
             />
 
             <HotelImageGallery photos={photos} />
@@ -96,30 +100,37 @@ export default function HotelDetails() {
             <Grid
               container
               rowSpacing={1}
-              my={2}
-              columnSpacing={{ xs: 1, sm: 2, md: 5 }}
+              mt={2}
+              mb={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
               <Grid item xs={4}>
-                <GuestRating hotelData={hotelData} />
+                <GuestRating
+                  reviewScore={hotelData.review_score}
+                  cleanliness={guestRating.cleanliness_score}
+                  comfort={guestRating.comfort_score}
+                  staff={guestRating.staff_score}
+                  location={guestRating.location_score}
+                />
               </Grid>
               <Grid item xs={4}>
                 <TopAmenities facilities={hotelData.hotel_facilities} />
               </Grid>
               <Grid item xs={4}>
-                <Box mb={7}>
+                <Box>
                   <Typography
                     variant="h6"
                     component="h2"
                     fontWeight="600"
-                    pb={2}
+                    py={2}
                   >
                     Neighborhood
                   </Typography>
                   <Box
                     display="flex"
                     justifyContent="center"
-                    mt={5}
-                    sx={{ width: "100%", height: "220px", overflow: "hidden" }}
+                    mt={3.7}
+                    sx={{ width: "100%", height: "216px", overflow: "hidden" }}
                   >
                     <img
                       src={mapPreview.map_preview_url}
