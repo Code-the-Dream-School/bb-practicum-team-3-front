@@ -15,20 +15,32 @@ export default function UserProfilePage() {
   return (
     <>
       <Header />
-      <Container maxWidth="xl" sx={{ px: { xs: 0.5, sm: 2, md: 3 } }}>
+      <Container
+        maxWidth="xl"
+        sx={{
+          marginTop: "80px",
+          marginBottom: "90px",
+          px: { xs: 0.5, sm: 2, md: 3 },
+        }}
+      >
         {isMatch ? (
           <Box display="flex" flexDirection="column" justifyContent="center">
             <UserProfileNav isMatch={isMatch} />
-
-            <Routes>
-              <Route index element={<PersonalDetails />} />
-              <Route path={`/personal`} element={<PersonalDetails />} />
-              <Route path={`/reservations`} element={<Reservations />} />
-              <Route
-                path={`/reservations/:reservationId`}
-                element={<ReservationDetails />}
-              />
-            </Routes>
+            <Box
+              sx={{
+                marginTop: "20px",
+              }}
+            >
+              <Routes>
+                <Route index element={<PersonalDetails />} />
+                <Route path={`/personal`} element={<PersonalDetails />} />
+                <Route path={`/reservations`} element={<Reservations />} />
+                <Route
+                  path={`/reservations/:reservationId`}
+                  element={<ReservationDetails />}
+                />
+              </Routes>
+            </Box>
           </Box>
         ) : (
           <Box

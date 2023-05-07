@@ -58,8 +58,6 @@ export default function ReservationDetails() {
             display: "flex",
             flexDirection: "column",
             flexWrap: "nowrap",
-            marginTop: "80px",
-            marginBottom: "50px",
           }}
         >
           <Typography

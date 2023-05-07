@@ -34,8 +34,6 @@ export default function PersonalDetails() {
             display: "flex",
             flexDirection: "column",
             flexWrap: "nowrap",
-            marginTop: "80px",
-            marginBottom: "50px",
           }}
         >
           <Typography

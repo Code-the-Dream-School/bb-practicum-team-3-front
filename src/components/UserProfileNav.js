@@ -21,7 +21,6 @@ export default function UserProfileNav({ isMatch }) {
         ...(isMatch && {
           maxWidth: "100vw",
         }),
-        mt: "80px",
         border: "solid 1px #d8d8d8",
         borderRadius: "8px",
       }}
