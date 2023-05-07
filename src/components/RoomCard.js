@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Card,
@@ -14,13 +14,12 @@ import KingBedIcon from "@mui/icons-material/KingBed";
 import PersonIcon from "@mui/icons-material/Person";
 
 export default function RoomCard({
+  id,
   room,
-  rooms,
-  onRoomAdded,
-  onTotalPriceChanged,
+  daysOfStay,
+  handleSelectedRooms,
 }) {
-  const [roomNumber, setRoomNumber] = React.useState(0);
-  const [totalPrice, setTotalPrice] = React.useState(room.price);
+  const [roomNumber, setRoomNumber] = useState(0);
 
   const formattedPrice = parseInt(room.price.toFixed(0)).toLocaleString(
     "en-US"
@@ -29,9 +28,7 @@ export default function RoomCard({
   const handleChange = (event) => {
     const selectedRoomNumber = event.target.value;
     setRoomNumber(selectedRoomNumber);
-    onRoomAdded(selectedRoomNumber);
-    setTotalPrice(selectedRoomNumber * room.price);
-    onTotalPriceChanged(totalPrice);
+    handleSelectedRooms(id, room.price, selectedRoomNumber);
   };
 
   return (
@@ -100,7 +97,7 @@ export default function RoomCard({
             color="text.secondary"
             display="inline"
           >
-            for {rooms.daysOfStay} nights
+            for {daysOfStay} nights
           </Typography>
 
           <Box sx={{ maxWidth: 120, mt: 2 }}>
