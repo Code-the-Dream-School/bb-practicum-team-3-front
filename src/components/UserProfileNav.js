@@ -25,103 +25,53 @@ export default function UserProfileNav({ isMatch }) {
         borderRadius: "8px",
       }}
     >
-      {isMatch ? (
-        <List>
-          <ListItem
-            component={Link}
-            to={`/profile/personal`}
-            sx={{
-              "&:hover": {
-                bgcolor: "#F7CD8F",
-              },
+      <List>
+        <ListItem
+          component={Link}
+          to={`/profile/personal`}
+          sx={{
+            "&:hover": {
+              bgcolor: "#F7CD8F",
+            },
+          }}
+        >
+          <ListItemIcon sx={{ fontSize: 20 }}>
+            <People />
+          </ListItemIcon>
+          <ListItemText
+            primary="Personal Details"
+            primaryTypographyProps={{
+              color: "primary",
+              fontWeight: "medium",
+              variant: "body1",
+              fontSize: 20,
             }}
-          >
-            <ListItemIcon sx={{ fontSize: 20 }}>
-              <People />
-            </ListItemIcon>
-            <ListItemText
-              primary="Personal Details"
-              primaryTypographyProps={{
-                color: "primary",
-                fontWeight: "medium",
-                variant: "body1",
-                fontSize: 20,
-              }}
-            />
-          </ListItem>
-          <Divider />
-          <ListItem
-            component={Link}
-            to={`/profile/reservations`}
-            sx={{
-              "&:hover": {
-                bgcolor: "#F7CD8F",
-              },
+          />
+        </ListItem>
+        <Divider />
+        <ListItem
+          component={Link}
+          to={`/profile/reservations`}
+          sx={{
+            "&:hover": {
+              bgcolor: "#F7CD8F",
+            },
+          }}
+        >
+          <ListItemIcon sx={{ fontSize: 20 }}>
+            <BedroomParentIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Reservations"
+            primaryTypographyProps={{
+              color: "primary",
+              fontWeight: "medium",
+              variant: "body1",
+              fontSize: 20,
             }}
-          >
-            <ListItemIcon sx={{ fontSize: 20 }}>
-              <BedroomParentIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Reservations"
-              primaryTypographyProps={{
-                color: "primary",
-                fontWeight: "medium",
-                variant: "body1",
-                fontSize: 20,
-              }}
-            />
-          </ListItem>
-        </List>
-      ) : (
-        <List>
-          <ListItem
-            component={Link}
-            to={`/profile/personal`}
-            sx={{
-              "&:hover": {
-                bgcolor: "#F7CD8F",
-              },
-            }}
-          >
-            <ListItemIcon sx={{ fontSize: 20 }}>
-              <People />
-            </ListItemIcon>
-            <ListItemText
-              primary="Personal Details"
-              primaryTypographyProps={{
-                color: "primary",
-                fontWeight: "medium",
-                variant: "body1",
-                fontSize: 20,
-              }}
-            />
-          </ListItem>
-          <Divider />
-          <ListItem
-            component={Link}
-            to={`/profile/reservations`}
-            sx={{
-              "&:hover": {
-                bgcolor: "#F7CD8F",
-              },
-            }}
-          >
-            <ListItemIcon sx={{ fontSize: 20 }}>
-              <BedroomParentIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Reservations"
-              primaryTypographyProps={{
-                color: "primary",
-                fontWeight: "medium",
-                variant: "body1",
-                fontSize: 20,
-              }}
-            />
-          </ListItem>
-        </List>
-      )}
+          />
+        </ListItem>
+      </List>
     </Box>
   );
 }
