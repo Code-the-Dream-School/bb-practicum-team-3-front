@@ -63,19 +63,19 @@ export default function Reservations() {
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell>Check in:</TableCell>
+                    <TableCell>Check in</TableCell>
                     <TableCell>{reservation.checkin}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell>Nights:</TableCell>
+                    <TableCell>Nights</TableCell>
                     <TableCell>{reservation.total_days}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell>Guests:</TableCell>
+                    <TableCell>Guests</TableCell>
                     <TableCell>{reservation.total_guests}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell>Location:</TableCell>
+                    <TableCell>Location</TableCell>
                     <TableCell>{reservation.address}</TableCell>
                   </TableRow>
                   <TableRow>

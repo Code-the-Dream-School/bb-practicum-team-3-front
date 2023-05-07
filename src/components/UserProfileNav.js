@@ -64,7 +64,7 @@ export default function UserProfileNav({ isMatch }) {
               <BedroomParentIcon />
             </ListItemIcon>
             <ListItemText
-              primary="Reservation Details"
+              primary="Reservations"
               primaryTypographyProps={{
                 color: "primary",
                 fontWeight: "medium",
@@ -112,7 +112,7 @@ export default function UserProfileNav({ isMatch }) {
               <BedroomParentIcon />
             </ListItemIcon>
             <ListItemText
-              primary="Reservation Details"
+              primary="Reservations"
               primaryTypographyProps={{
                 color: "primary",
                 fontWeight: "medium",
