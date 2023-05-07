@@ -12,22 +12,32 @@ import {
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import fetchPersonalDetails from "../api/fetchPersonalDetails";
 import Loading from "../components/Loading";
+import Error from "./Error";
 
 export default function PersonalDetails() {
   const [user, setUser] = useState(null);
+
   const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState(true);
 
   useEffect(() => {
-    fetchPersonalDetails().then((returnMessage) => {
-      setUser(returnMessage.user);
-      setIsFetching(false);
-    });
+    fetchPersonalDetails()
+      .then((returnMessage) => {
+        setUser(returnMessage.user);
+        setIsFetching(false);
+        setError(false);
+      })
+      .catch((error) => {
+        setIsFetching(false);
+      });
   }, []);
 
   return (
     <Container maxWidth="md" sx={{ marginLeft: "0px", marginRight: "0px" }}>
       {isFetching ? (
         <Loading />
+      ) : error ? (
+        <Error />
       ) : (
         <Box
           sx={{

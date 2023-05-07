@@ -13,23 +13,32 @@ import {
 import { Link as ReactRouterLink } from "react-router-dom";
 import fetchReservationDetails from "../api/fetchReservationDetails";
 import Loading from "./Loading";
+import Error from "./Error";
 
 export default function Reservations() {
   const [reservations, setReservations] = useState([]);
 
   const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState(true);
 
   useEffect(() => {
-    fetchReservationDetails().then((returnMessage) => {
-      setReservations(returnMessage.data);
-      setIsFetching(false);
-    });
+    fetchReservationDetails()
+      .then((returnMessage) => {
+        setReservations(returnMessage.data);
+        setIsFetching(false);
+        setError(false);
+      })
+      .catch((error) => {
+        setIsFetching(false);
+      });
   }, []);
 
   return (
     <Container maxWidth="md" sx={{ marginLeft: "0px", marginRight: "0px" }}>
       {isFetching ? (
         <Loading />
+      ) : error ? (
+        <Error />
       ) : reservations.length === 0 ? (
         <Typography variant="h5" color="black">
           It appears that you haven't made any reservations yet.
