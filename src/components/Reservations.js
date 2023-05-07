@@ -31,15 +31,15 @@ export default function Reservations() {
       {isFetching ? (
         <Loading />
       ) : reservations.length === 0 ? (
-        <Typography> You do not have a reservation</Typography>
+        <Typography variant="h5" color="black">
+          It appears that you haven't made any reservations yet.
+        </Typography>
       ) : (
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             flexWrap: "nowrap",
-            marginTop: "80px",
-            marginBottom: "50px",
           }}
         >
           <Typography
@@ -54,10 +54,10 @@ export default function Reservations() {
 
           {reservations.map((reservation) => {
             return (
-              <Table size="small">
+              <Table key={reservation.id} size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell></TableCell>
+                    <TableCell width="40%"></TableCell>
                     <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
