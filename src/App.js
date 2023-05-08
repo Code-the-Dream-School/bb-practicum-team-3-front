@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import SearchResultsPage from "./pages/SearchResultsPage";
+import HotelDetails from "./pages/HotelDetails";
 import UserProfilePage from "./pages/UserProfilePage";
 import NotFound from "./pages/NotFound";
 
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/searchresults" element={<SearchResultsPage />} />
+        <Route path="/hoteldetails" element={<HotelDetails />} />
         <Route path="/profile/*" element={<UserProfilePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

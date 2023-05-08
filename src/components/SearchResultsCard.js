@@ -16,7 +16,7 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const theme = createTheme({
   components: {
@@ -47,6 +47,20 @@ const theme = createTheme({
 
 export default function SearchResultsCard({ hotel }) {
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    const searchParams = new URLSearchParams(location.search);
+    const guestNumber = searchParams.get("guestNumber");
+    const checkinDate = searchParams.get("checkinDate");
+    const checkoutDate = searchParams.get("checkoutDate");
+
+    const queryString = `?hotelId=${hotel.id}&guestNumber=${guestNumber}&checkinDate=${checkinDate}&checkoutDate=${checkoutDate}`;
+
+    navigate(`/hoteldetails${queryString}`);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -90,66 +104,69 @@ export default function SearchResultsCard({ hotel }) {
               </Typography>
 
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                {hotel.review_score && hotel.review_score_word && hotel.review_number && (
-                <>
-                {isMatch ? (
-                  <>
-                    <Typography
-                      variant="body2"
-                      component="p"
-                      mr={0.5}
-                      sx={{
-                        fontWeight: "bold",
-                        color: "primary.main",
-                      }}
-                    >
-                      {hotel.review_score}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      component="p"
-                      ml={0.5}
-                      sx={{ fontWeight: "bold", color: "primary.main" }}
-                    >
-                      {hotel.review_score_word}
-                    </Typography>
-                  </>
-                ) : (
-                  <>
-                    <Typography
-                      variant="subtitle2"
-                      component="p"
-                      mr={0.5}
-                      px={0.3}
-                      py={0.1}
-                      sx={{
-                        color: "white",
-                        fontWeight: "bold",
-                        backgroundColor: "secondary.main",
-                        borderRadius: "5px",
-                        width: "20px",
-                        height: "20px",
-                        textAlign: "center",
-                      }}
-                    >
-                      {hotel.review_score}
-                    </Typography>
-                    <Typography
-                      variant="subtitle2"
-                      component="p"
-                      ml={0.5}
-                      sx={{ fontWeight: "bold" }}
-                    >
-                      {hotel.review_score_word}
-                    </Typography>
-                  </>
-                )}
-                <Typography variant="body2" component="p" ml={1.5}>
-                  {/* ({hotel.review_number} reviews) */}
-                  {`(${hotel.review_number.toLocaleString("en-US")} reviews)`}
-                </Typography>
-                </>
-              )}
+                {hotel.review_score &&
+                  hotel.review_score_word &&
+                  hotel.review_number && (
+                    <>
+                      {isMatch ? (
+                        <>
+                          <Typography
+                            variant="body2"
+                            component="p"
+                            mr={0.5}
+                            sx={{
+                              fontWeight: "bold",
+                              color: "primary.main",
+                            }}
+                          >
+                            {hotel.review_score}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            component="p"
+                            ml={0.5}
+                            sx={{ fontWeight: "bold", color: "primary.main" }}
+                          >
+                            {hotel.review_score_word}
+                          </Typography>
+                        </>
+                      ) : (
+                        <>
+                          <Typography
+                            variant="subtitle2"
+                            component="p"
+                            mr={0.5}
+                            px={0.3}
+                            py={0.1}
+                            sx={{
+                              color: "white",
+                              fontWeight: "bold",
+                              backgroundColor: "secondary.main",
+                              borderRadius: "5px",
+                              width: "20px",
+                              height: "20px",
+                              textAlign: "center",
+                            }}
+                          >
+                            {hotel.review_score}
+                          </Typography>
+                          <Typography
+                            variant="subtitle2"
+                            component="p"
+                            ml={0.5}
+                            sx={{ fontWeight: "bold" }}
+                          >
+                            {hotel.review_score_word}
+                          </Typography>
+                        </>
+                      )}
+                      <Typography variant="body2" component="p" ml={1.5}>
+                        {`(${hotel.review_number.toLocaleString(
+                          "en-US"
+                        )} reviews)`}
+                      </Typography>
+                    </>
+                  )}
               </Box>
 
               <Box
@@ -253,12 +270,7 @@ export default function SearchResultsCard({ hotel }) {
                 </Typography>
               </Box>
 
-              <Button
-                component={ReactRouterLink}
-                size="small"
-                variant="contained"
-                to="/hoteldetail"
-              >
+              <Button size="small" variant="contained" onClick={handleSubmit}>
                 See Availability
               </Button>
             </CardActions>
