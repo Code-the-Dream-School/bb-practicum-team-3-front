@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import RoomCard from "../components/RoomCard";
 import ReservationSummary from "../components/ReservationSummary";
+import RoomSearchForm from "../components/RoomSearchForm";
 
-export default function Rooms({ rooms }) {
+export default function Rooms({ rooms, hotelId }) {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+
   const [totalRooms, setTotalRooms] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [roomTotalPriceAndRoomNum, setRoomTotalPriceAndRoomNum] = useState([]);
@@ -50,30 +54,41 @@ export default function Rooms({ rooms }) {
       >
         Availability
       </Typography>
+
       <Box
         sx={{
-          display: "flex",
-          flexDirection: { xs: "column", sm: "column", md: "row", lg: "row" },
-          gap: { xs: 2, sm: 3 },
+          display: "grid",
+          gridTemplateColumns: isMatch ? "1fr" : "repeat(3, 1fr)",
+          gap: 1,
+          mb: 7,
+          gridTemplateRows: "auto",
+          gridTemplateAreas: isMatch
+            ? `"updateForm" 
+               "roomCard"
+               "summary"`
+            : `"updateForm updateForm ."
+              "roomCard roomCard summary"`,
         }}
-        mb={7}
-        minHeight={500}
       >
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 3, flex: 2 }}>
-          {rooms.rooms.map((room, index) => {
-            return (
-              <RoomCard
-                key={index}
-                id={index}
-                room={room}
-                daysOfStay={rooms.days_of_stay}
-                handleSelectedRooms={handleSelectedRooms}
-              />
-            );
-          })}
+        <Box sx={{ gridArea: "updateForm" }}>
+          <RoomSearchForm hotelId={hotelId} />
         </Box>
-
-        <Box sx={{ flex: 1 }}>
+        <Box sx={{ gridArea: "roomCard" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            {rooms.rooms.map((room, index) => {
+              return (
+                <RoomCard
+                  key={index}
+                  id={index}
+                  room={room}
+                  daysOfStay={rooms.days_of_stay}
+                  handleSelectedRooms={handleSelectedRooms}
+                />
+              );
+            })}
+          </Box>
+        </Box>
+        <Box sx={{ gridArea: "summary" }}>
           <ReservationSummary
             checkin_date={rooms.checkin_date}
             checkout_date={rooms.checkout_date}

@@ -7,6 +7,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { HashLink as Link } from "react-router-hash-link";
+import { useLocation } from "react-router-dom";
 
 export default function HotelTitleInfo({
   name,
@@ -21,6 +22,7 @@ export default function HotelTitleInfo({
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const formattedPrice = parseInt(price.toFixed(0)).toLocaleString("en-US");
+  const location = useLocation();
 
   return (
     <Box
@@ -112,7 +114,15 @@ export default function HotelTitleInfo({
           for {days_of_stay} {days_of_stay === 1 ? "night" : "nights"}
         </Typography>
 
-        <Link to="#rooms" smooth style={{ textDecoration: "none" }}>
+        <Link
+          to={{
+            pathname: "/hoteldetails",
+            hash: "#rooms",
+            search: location.search,
+          }}
+          smooth
+          style={{ textDecoration: "none" }}
+        >
           <Button variant="contained">Reserve</Button>
         </Link>
       </Box>

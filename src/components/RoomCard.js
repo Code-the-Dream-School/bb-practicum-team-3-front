@@ -85,7 +85,7 @@ export default function RoomCard({
             flexWrap: "wrap",
           }}
         >
-          {room.amenities.map((amenity, index) => (
+          {room.amenities.slice(0, 9).map((amenity, index) => (
             <Box
               key={index}
               sx={{

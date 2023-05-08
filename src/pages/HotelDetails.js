@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box, Typography, Grid } from "@mui/material";
+import { useLocation } from "react-router-dom";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SearchForm from "../components/SearchForm";
@@ -12,9 +14,9 @@ import ReviewsCarousel from "../components/ReviewsCarousel";
 import AllAmenities from "../components/AllAmenities";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+
 import fetchHotelDetails from "../api/fetchHotelDetails";
 import fetchRooms from "../api/fetchRooms";
-import { useLocation } from "react-router-dom";
 
 export default function HotelDetails() {
   const location = useLocation();
@@ -111,9 +113,11 @@ export default function HotelDetails() {
                   location={guestRating.location_score}
                 />
               </Grid>
+
               <Grid item xs={12} sm={12} md={4}>
                 <TopAmenities facilities={hotelData.hotel_facilities} />
               </Grid>
+
               <Grid item xs={12} sm={12} md={4}>
                 <Box>
                   <Typography
@@ -152,7 +156,7 @@ export default function HotelDetails() {
               </Grid>
             </Grid>
 
-            <Rooms rooms={rooms} />
+            <Rooms rooms={rooms} hotelId={hotelData.hotel_id} />
 
             <ReviewsCarousel reviews={reviews.result} />
 
