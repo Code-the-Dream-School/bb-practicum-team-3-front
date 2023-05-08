@@ -16,7 +16,7 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const theme = createTheme({
   components: {
@@ -48,11 +48,17 @@ const theme = createTheme({
 export default function SearchResultsCard({ hotel }) {
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
+  const location = useLocation();
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    // const queryString = `?hotelId=${hotel.id}&guestNumber=${guestNumber}&roomNumber=${roomNumber}&checkinDate=${formattedCheckinDate}&checkoutDate=${formattedCheckoutDate}`;
-    const queryString = `?hotelId=${hotel.id}`;
+    const searchParams = new URLSearchParams(location.search);
+    const guestNumber = searchParams.get("guestNumber");
+    const checkinDate = searchParams.get("checkinDate");
+    const checkoutDate = searchParams.get("checkoutDate");
+
+    const queryString = `?hotelId=${hotel.id}&guestNumber=${guestNumber}&checkinDate=${checkinDate}&checkoutDate=${checkoutDate}`;
+
     navigate(`/hoteldetails${queryString}`);
   };
 

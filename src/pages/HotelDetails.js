@@ -31,17 +31,15 @@ export default function HotelDetails() {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const hotelId = searchParams.get("hotelId");
-    // const guestNumber = searchParams.get("guestNumber");
-    // const roomNumber = searchParams.get("roomNumber");
-    // const checkinDate = searchParams.get("checkinDate");
-    // const checkoutDate = searchParams.get("checkoutDate");
+    const guestNumber = searchParams.get("guestNumber");
+    const checkinDate = searchParams.get("checkinDate");
+    const checkoutDate = searchParams.get("checkoutDate");
 
     const searchData = {
       hotelId,
-      //   guestNumber,
-      //   roomNumber,
-      //   checkinDate,
-      //   checkoutDate,
+      guestNumber,
+      checkinDate,
+      checkoutDate,
     };
 
     fetchHotelDetails(searchData)
@@ -58,11 +56,11 @@ export default function HotelDetails() {
         setIsFetching(false);
       });
 
-    fetchRooms().then((returnMessage) => {
+    fetchRooms(searchData).then((returnMessage) => {
       setRooms(returnMessage.data);
       setIsFetching(true);
     });
-  }, []);
+  }, [location.search]);
 
   return (
     <>
