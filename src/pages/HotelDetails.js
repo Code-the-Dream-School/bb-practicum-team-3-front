@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box, Typography, Grid } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -17,9 +17,11 @@ import Error from "../components/Error";
 
 import fetchHotelDetails from "../api/fetchHotelDetails";
 import fetchRooms from "../api/fetchRooms";
+import fetchUserToken from "../api/fetchUserToken";
 
 export default function HotelDetails() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [hotelData, setHotelData] = useState(null);
   const [mapPreview, setMapPreview] = useState(null);
@@ -27,6 +29,8 @@ export default function HotelDetails() {
   const [guestRating, setGuestRating] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [rooms, setRooms] = useState(null);
+
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(true);
 
@@ -62,7 +66,25 @@ export default function HotelDetails() {
       setRooms(returnMessage.data);
       setIsFetching(true);
     });
+
+    fetchUserToken().then((data) => {
+      if (data.token) {
+        setIsUserLoggedIn(true);
+      }
+    });
   }, [location.search]);
+
+  const handleReserve = () => {
+    if (isUserLoggedIn) {
+      console.log("send reservation to db");
+    } else {
+      // If user is not authenticated, redirect to signin page with redirect prop
+      const currentUrlWithSearchParams = `${window.location.pathname}${window.location.search}`;
+      navigate("/signin", {
+        state: { redirectUrl: currentUrlWithSearchParams },
+      });
+    }
+  };
 
   return (
     <>
@@ -156,7 +178,11 @@ export default function HotelDetails() {
               </Grid>
             </Grid>
 
-            <Rooms rooms={rooms} hotelId={hotelData.hotel_id} />
+            <Rooms
+              rooms={rooms}
+              hotelId={hotelData.hotel_id}
+              handleReserve={handleReserve}
+            />
 
             <ReviewsCarousel reviews={reviews.result} />
 

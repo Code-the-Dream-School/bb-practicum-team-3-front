@@ -4,7 +4,7 @@ import RoomCard from "../components/RoomCard";
 import ReservationSummary from "../components/ReservationSummary";
 import RoomSearchForm from "../components/RoomSearchForm";
 
-export default function Rooms({ rooms, hotelId }) {
+export default function Rooms({ rooms, hotelId, handleReserve }) {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -95,6 +95,7 @@ export default function Rooms({ rooms, hotelId }) {
             days_of_stay={rooms.days_of_stay}
             totalRooms={totalRooms}
             totalPrice={totalPrice}
+            handleReserve={handleReserve}
           />
         </Box>
       </Box>

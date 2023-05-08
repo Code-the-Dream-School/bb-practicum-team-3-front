@@ -7,6 +7,7 @@ export default function ReservationSummary({
   days_of_stay,
   totalRooms,
   totalPrice,
+  handleReserve,
 }) {
   const formattedTotalPrice = parseInt(totalPrice.toFixed(0)).toLocaleString(
     "en-US"
@@ -73,7 +74,9 @@ export default function ReservationSummary({
         </Typography>
       </Box>
       <Box display="flex" flexDirection="column" mx={2} mb={2}>
-        <Button variant="contained">Reserve</Button>
+        <Button variant="contained" onClick={handleReserve}>
+          Reserve
+        </Button>
       </Box>
     </Card>
   );
