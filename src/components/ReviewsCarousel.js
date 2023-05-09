@@ -38,7 +38,12 @@ export default function ReviewsCarousel({ reviews }) {
     ],
   };
   return (
-    <Grid container mb={7}>
+    <Grid
+      container
+      maxWidth="xl"
+      mb={7}
+      sx={{ px: { xs: 0.5, sm: 2, md: 0, lg: 0, xl: 0 } }}
+    >
       <Typography variant="h6" component="h2" fontWeight="600" pb={2}>
         Reviews
       </Typography>

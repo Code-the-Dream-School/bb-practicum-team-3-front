@@ -52,7 +52,7 @@ export default function SearchForm() {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ px: { xs: 0.5, sm: 2, md: 3 } }}>
       <Box
         sx={{
           display: "flex",

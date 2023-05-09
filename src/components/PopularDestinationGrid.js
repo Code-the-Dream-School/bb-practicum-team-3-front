@@ -5,7 +5,7 @@ import { popularDestinationImages } from "../assets/popularDestinationImages";
 
 export default function PopularDestinationGrid() {
   return (
-    <Container maxWidth="xl" sx={{ mt: 4 }}>
+    <Container maxWidth="xl" sx={{ px: { xs: 0.5, sm: 2, md: 3 }, mt: 4 }}>
       <Typography
         variant="h5"
         component="h1"
