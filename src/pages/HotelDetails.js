@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box, Typography, Grid } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -17,9 +17,12 @@ import Error from "../components/Error";
 
 import fetchHotelDetails from "../api/fetchHotelDetails";
 import fetchRooms from "../api/fetchRooms";
+import fetchUserToken from "../api/fetchUserToken";
+import fetchCreateReservation from "../api/fetchCreateReservation";
 
 export default function HotelDetails() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [hotelData, setHotelData] = useState(null);
   const [mapPreview, setMapPreview] = useState(null);
@@ -27,6 +30,13 @@ export default function HotelDetails() {
   const [guestRating, setGuestRating] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [rooms, setRooms] = useState(null);
+  const [guestNumber, setGuestNumber] = useState(2);
+
+  const [totalRooms, setTotalRooms] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [roomTotalPriceAndRoomNum, setRoomTotalPriceAndRoomNum] = useState([]);
+
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(true);
 
@@ -51,6 +61,7 @@ export default function HotelDetails() {
         setGuestRating(returnMessage.review_scores);
         setReviews(returnMessage.reviews);
         setMapPreview(returnMessage.map_preview);
+
         setIsFetching(false);
         setError(false);
       })
@@ -60,9 +71,74 @@ export default function HotelDetails() {
 
     fetchRooms(searchData).then((returnMessage) => {
       setRooms(returnMessage.data);
+      setGuestNumber(returnMessage.data.guestNumber);
       setIsFetching(true);
     });
+
+    fetchUserToken().then((data) => {
+      if (data.token) {
+        setIsUserLoggedIn(true);
+      }
+    });
   }, [location.search]);
+
+  useEffect(() => {
+    const totalRooms = roomTotalPriceAndRoomNum.reduce(
+      (total, room) => total + room.num_of_rooms,
+      0
+    );
+    setTotalRooms(totalRooms);
+
+    const totalPrice = roomTotalPriceAndRoomNum.reduce(
+      (total, room) => total + room.price * room.num_of_rooms,
+      0
+    );
+    setTotalPrice(totalPrice);
+  }, [roomTotalPriceAndRoomNum]);
+
+  const handleSelectedRooms = (id, price, num_of_rooms) => {
+    const roomIndex = roomTotalPriceAndRoomNum.findIndex(
+      (room) => room.id === id
+    );
+
+    if (roomIndex !== -1) {
+      const updatedRooms = roomTotalPriceAndRoomNum.map((room) =>
+        room.id === id ? { ...room, num_of_rooms } : room
+      );
+
+      setRoomTotalPriceAndRoomNum(updatedRooms);
+    } else {
+      const room = { id, price, num_of_rooms };
+      setRoomTotalPriceAndRoomNum([...roomTotalPriceAndRoomNum, room]);
+    }
+  };
+
+  const handleReserve = async () => {
+    const reservationDetails = {
+      checkin: rooms.checkin_date,
+      checkout: rooms.checkout_date,
+      total_days: rooms.days_of_stay,
+      total_guests: rooms.guestNumber,
+      total_rooms: totalRooms,
+      total_price: totalPrice.toFixed(2),
+      address: hotelData.address + ", " + hotelData.city + ", " + hotelData.zip,
+      date_received: new Date().toISOString().slice(0, 10),
+    };
+
+    if (isUserLoggedIn) {
+      await fetchCreateReservation(reservationDetails).then((returnMessage) => {
+        if (returnMessage.data) {
+          navigate(`/profile/reservations/${returnMessage.data._id}`);
+        }
+      });
+    } else {
+      // If user is not authenticated, redirect to signin page with redirect prop
+      const currentUrlWithSearchParams = `${window.location.pathname}${window.location.search}`;
+      navigate("/signin", {
+        state: { redirectUrl: currentUrlWithSearchParams },
+      });
+    }
+  };
 
   return (
     <>
@@ -156,7 +232,15 @@ export default function HotelDetails() {
               </Grid>
             </Grid>
 
-            <Rooms rooms={rooms} hotelId={hotelData.hotel_id} />
+            <Rooms
+              rooms={rooms}
+              hotelId={hotelData.hotel_id}
+              totalRooms={totalRooms}
+              totalPrice={totalPrice}
+              guestNumber={guestNumber}
+              handleSelectedRooms={handleSelectedRooms}
+              handleReserve={handleReserve}
+            />
 
             <ReviewsCarousel reviews={reviews.result} />
 

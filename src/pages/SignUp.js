@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {
   Box,
@@ -21,10 +21,11 @@ import fetchSignup from "../api/fetchSignup";
 const theme = createTheme();
 
 export default function SignUp() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,7 +39,12 @@ export default function SignUp() {
 
     fetchSignup(submissionData).then((returnMessage) => {
       if (returnMessage.user) {
-        return navigate("/");
+        if (location.state && location.state.redirectUrl) {
+          // navigate back to the original URL with search params
+          navigate(location.state.redirectUrl, { replace: true });
+        } else {
+          navigate("/");
+        }
       } else {
         setErrorMessage(returnMessage.msg);
         setIsError(true);

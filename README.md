@@ -1,27 +1,58 @@
-# Front-End Repo for Team 3 of Baboon/Bald Eagle Practicum
+# Front-End Repo for Team 3 of Baboon/Bald Eagle Practicum -StayFinder
 
-This will be the front-end for bb-practicum-team-3-back.
+## About StayFinder
 
-It is suggested that you run these instructions **after** you setup the back-end server first.
-You can go through these steps during your first group meeting in-case you need assistance from your mentors.
+A hotel search and booking website that provides users with a comprehensive selection of hotels worldwide, complete with detailed information about each property and the ability to create and book reservations
 
-You will have two folders inside one team folder (one for front-end and one for back-end). 
+![HomePage](images/homepage.PNG)
 
-![folders](images/folders.png)
+![Search Results Page](images/searchresultspage.PNG)
 
->The front-end app (React) will be running on port 3000. The back-end server will be running on port 8000. You will need to run both the front-end app and the back-end server at the same time to test your app.
+![Hotel Details Page 1](images/hoteldetailspage1.PNG)
+![Hotel Details Page 2](images/hoteldetailspage2.PNG)
+![Hotel Details Page 3](images/hoteldetailspage3.PNG)
+![Hotel Details Page 4](images/hoteldetailspage4.PNG)
 
-### Setting up local development environment
+## Setup
 
-1. Clone this repository to the folder that was already created for both the front-end and back-end repos
-2. Run `npm install` to install dependencies
-3. Pull the latest version of the `main` branch (when needed)
-4. Run `npm start` to start the development server
-5. Open http://localhost:3000 with your browser to see the data received the back-end server.
-6. Now you have your front-end and back-end running locally!
+To set up the server locally, run the following:
 
-#### Running the front-end server in Visual Studio Code
-![vsc running](images/front-end-running-vsc.png)
+```shell
+npm i && npm run dev
+```
 
-#### Running the front-end server in the browser
-![browser running](images/front-end-running-browser.png)
+> The front-end app will be running on port 3000. The back-end server will be running on port 8000. You will need to run both the front-end app and the back-end server at the same time to test your app.
+
+## Built With
+
+- JavaScript
+- Express
+- Mongoose
+- jsonwebtoken
+- bcryptjs
+
+## Live Demo
+
+A live demo is currently being hosted on render.com:
+
+- [FrontEnd](https://stayfinder.onrender.com/)
+- [BackEnd](https://stayfinder-api.onrender.com/)
+
+## Features Include:
+
+- Signup and Signin pages/routes. Token saved in cookie.
+- In header you are able to signin or signup if aleady signin then user is able to signoff and navigate to the profile page.
+- In User Profile user can see user's info and manage reservations
+- You are able to search for a hotel by city or by popular destinations
+- See all available hotels in an area
+- View the detailed hotel pages with room availability and descriptions based on guest number, checkin date and checkout date
+- Streamlined reservation process with check-in and check-out date selection
+- Create, View and Delete reservations
+- Responsive design for both laptop and mobile devices
+
+## Contributors
+
+- Oksana ([GitHub](https://github.com/OxanaMl))
+- Maryna ([GitHub](https://github.com/marinacod))
+- Mario ([GitHub](https://github.com/mariolarios))
+- Miguel ([GitHub](https://github.com/madebymiguel))

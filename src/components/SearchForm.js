@@ -45,12 +45,14 @@ export default function SearchForm() {
     const formattedCheckoutDate =
       checkoutDate !== null ? checkoutDate.format("YYYY-MM-DD") : null;
 
-    const queryString = `?destination=${destination}&guestNumber=${guestNumber}&roomNumber=${roomNumber}&checkinDate=${formattedCheckinDate}&checkoutDate=${formattedCheckoutDate}`;
+    const formattedDesination = destination.toLowerCase();
+
+    const queryString = `?destination=${formattedDesination}&guestNumber=${guestNumber}&roomNumber=${roomNumber}&checkinDate=${formattedCheckinDate}&checkoutDate=${formattedCheckoutDate}`;
     navigate(`/searchresults${queryString}`);
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ px: { xs: 0.5, sm: 2, md: 3 } }}>
       <Box
         sx={{
           display: "flex",
@@ -61,7 +63,7 @@ export default function SearchForm() {
       >
         <Paper
           sx={{
-            borderRadius: 5,
+            borderRadius: 3,
             p: 2,
             width: "100%",
             flexWrap: "wrap",

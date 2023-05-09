@@ -5,7 +5,7 @@ import { popularDestinationImages } from "../assets/popularDestinationImages";
 
 export default function PopularDestinationGrid() {
   return (
-    <Container maxWidth="xl" sx={{ mt: 4 }}>
+    <Container maxWidth="xl" sx={{ px: { xs: 0.5, sm: 2, md: 3 }, mt: 4 }}>
       <Typography
         variant="h5"
         component="h1"
@@ -19,7 +19,7 @@ export default function PopularDestinationGrid() {
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Link
               component={ReactRouterLink}
-              to={`/searchresults?destination=${image.title}&guestNumber=1&roomNumber=2&checkinDate=null&checkoutDate=null`}
+              to={`/searchresults?destination=${image.title}&guestNumber=2&roomNumber=1&checkinDate=null&checkoutDate=null`}
             >
               <Box
                 sx={{

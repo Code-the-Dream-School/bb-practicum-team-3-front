@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import fetchSignin from "../api/fetchSignin";
 import {
@@ -23,10 +23,11 @@ import {
 const theme = createTheme();
 
 export default function SignIn() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,11 +39,24 @@ export default function SignIn() {
 
     fetchSignin(submissionData).then((returnMessage) => {
       if (returnMessage.user) {
-        return navigate("/");
+        if (location.state && location.state.redirectUrl) {
+          // navigate back to the original URL with search params
+          navigate(location.state.redirectUrl, { replace: true });
+        } else {
+          navigate("/");
+        }
       } else {
         setErrorMessage(returnMessage.msg);
         setIsError(true);
       }
+    });
+  };
+
+  const handleSignupClick = (event) => {
+    event.preventDefault(); // prevent the default behavior of the link
+    navigate("/signup", {
+      state: { redirectUrl: location.state.redirectUrl },
+      replace: true,
     });
   };
 
@@ -109,7 +123,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link component={ReactRouterLink} to="/signup">
+                <Link component={ReactRouterLink} onClick={handleSignupClick}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

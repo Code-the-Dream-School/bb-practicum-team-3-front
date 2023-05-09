@@ -143,8 +143,8 @@ export default function SearchResultsCard({ hotel }) {
                               fontWeight: "bold",
                               backgroundColor: "secondary.main",
                               borderRadius: "5px",
-                              width: "20px",
-                              height: "20px",
+                              width: "25px",
+                              height: "22px",
                               textAlign: "center",
                             }}
                           >

@@ -10,10 +10,9 @@ export default function AllAmenities({ facilities, name }) {
       </Typography>
       <Box
         sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          minHeight: "300px",
-          justifyContent: "space-between",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+          gap: "16px",
           mb: 12,
         }}
       >
@@ -23,8 +22,6 @@ export default function AllAmenities({ facilities, name }) {
             sx={{
               display: "flex",
               alignItems: "flex-start",
-              minWidth: "150px",
-              flexBasis: { xs: "50%", sm: "50%", md: "calc(25% - 16px)" },
             }}
           >
             <CheckIcon sx={{ width: 20, color: "green", mr: 1 }} />

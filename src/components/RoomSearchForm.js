@@ -7,12 +7,12 @@ import InputAdornment from "@mui/material/InputAdornment";
 import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router-dom";
 
-export default function RoomSearchForm({ hotelId }) {
+export default function RoomSearchForm({ hotelId, guests }) {
   const navigate = useNavigate();
 
   const [checkinDate, setCheckinDate] = useState(null);
   const [checkoutDate, setCheckoutDate] = useState(null);
-  const [guestNumber, setGuestNumber] = useState(2);
+  const [guestNumber, setGuestNumber] = useState(guests);
 
   const handleCheckinChange = (date) => {
     setCheckinDate(date);

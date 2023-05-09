@@ -17,6 +17,7 @@ export default function RoomCard({
   id,
   room,
   daysOfStay,
+  guestNumber,
   handleSelectedRooms,
 }) {
   const [roomNumber, setRoomNumber] = useState(0);
@@ -38,8 +39,6 @@ export default function RoomCard({
         minHeight: { xs: 200, sm: 220, md: 220 },
         borderRadius: "8px",
         display: "flex",
-        // flexWrap: "nowrap",
-        // flexDirection: { xs: "column", sm: "row", md: "row" },
       }}
     >
       <Grid container>
@@ -68,7 +67,7 @@ export default function RoomCard({
                 color="text.secondary"
                 sx={{ pl: 0.5 }}
               >
-                Sleeps up to {room.sleeps}
+                Sleeps up to {guestNumber}
               </Typography>
             </Box>
           </Box>

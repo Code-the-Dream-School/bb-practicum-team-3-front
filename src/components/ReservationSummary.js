@@ -5,8 +5,10 @@ export default function ReservationSummary({
   checkin_date,
   checkout_date,
   days_of_stay,
+  guestNumber,
   totalRooms,
   totalPrice,
+  handleReserve,
 }) {
   const formattedTotalPrice = parseInt(totalPrice.toFixed(0)).toLocaleString(
     "en-US"
@@ -59,7 +61,9 @@ export default function ReservationSummary({
         <Typography variant="body1" component="p" fontWeight={600} mt={2}>
           {`${totalRooms} ${
             totalRooms === 1 ? "Room" : "Rooms"
-          } - ${days_of_stay} ${days_of_stay === 1 ? "Night" : "Nights"}`}
+          } - ${days_of_stay} ${
+            days_of_stay === 1 ? "Night" : "Nights"
+          } - ${guestNumber} Guests`}
         </Typography>
 
         <Typography
@@ -73,7 +77,9 @@ export default function ReservationSummary({
         </Typography>
       </Box>
       <Box display="flex" flexDirection="column" mx={2} mb={2}>
-        <Button variant="contained">Reserve</Button>
+        <Button variant="contained" onClick={handleReserve}>
+          Reserve
+        </Button>
       </Box>
     </Card>
   );

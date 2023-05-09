@@ -31,15 +31,13 @@ export default function HotelTitleInfo({
         justifyContent: "space-between",
       }}
     >
-      <Box>
+      <Box display="flex" flexDirection="column" justifyContent="space-evenly">
         <Typography variant="h5" component="h1" fontWeight="600">
           {name}
         </Typography>
-
         <Typography variant="body2" component="p" color="#212A2F">
           {address}, {city}, {zip}
         </Typography>
-
         <Box sx={{ display: "flex", alignItems: "center" }}>
           {review_score && review_score_word && (
             <>
@@ -78,8 +76,8 @@ export default function HotelTitleInfo({
                       fontWeight: "bold",
                       backgroundColor: "secondary.main",
                       borderRadius: "5px",
-                      width: "24px",
-                      height: "23px",
+                      width: "30px",
+                      height: "24px",
                       textAlign: "center",
                     }}
                   >
