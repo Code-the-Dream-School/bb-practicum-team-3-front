@@ -61,7 +61,7 @@ export default function SearchForm() {
       >
         <Paper
           sx={{
-            borderRadius: 5,
+            borderRadius: 3,
             p: 2,
             width: "100%",
             flexWrap: "wrap",
