@@ -15,14 +15,14 @@ export default function GuestRating({
           variant="h6"
           component="p"
           mr={0.8}
-          px={0.7}
+          px={0.4}
           sx={{
             color: "white",
             fontWeight: "bold",
             backgroundColor: "secondary.main",
             borderRadius: "5px",
-            width: "30px",
-            height: "30px",
+            width: "35px",
+            height: "31px",
             textAlign: "center",
           }}
         >
