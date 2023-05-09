@@ -30,6 +30,7 @@ export default function HotelDetails() {
   const [guestRating, setGuestRating] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [rooms, setRooms] = useState(null);
+  const [guestNumber, setGuestNumber] = useState(2);
 
   const [totalRooms, setTotalRooms] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -60,6 +61,7 @@ export default function HotelDetails() {
         setGuestRating(returnMessage.review_scores);
         setReviews(returnMessage.reviews);
         setMapPreview(returnMessage.map_preview);
+
         setIsFetching(false);
         setError(false);
       })
@@ -69,6 +71,7 @@ export default function HotelDetails() {
 
     fetchRooms(searchData).then((returnMessage) => {
       setRooms(returnMessage.data);
+      setGuestNumber(returnMessage.data.guestNumber);
       setIsFetching(true);
     });
 
@@ -123,7 +126,6 @@ export default function HotelDetails() {
     };
 
     if (isUserLoggedIn) {
-      console.log(reservationDetails);
       await fetchCreateReservation(reservationDetails).then((returnMessage) => {
         if (returnMessage.data) {
           navigate(`/profile/reservations/${returnMessage.data._id}`);
@@ -235,7 +237,7 @@ export default function HotelDetails() {
               hotelId={hotelData.hotel_id}
               totalRooms={totalRooms}
               totalPrice={totalPrice}
-              guestNumber={rooms.guestNumber}
+              guestNumber={guestNumber}
               handleSelectedRooms={handleSelectedRooms}
               handleReserve={handleReserve}
             />

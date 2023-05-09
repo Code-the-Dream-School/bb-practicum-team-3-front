@@ -66,6 +66,7 @@ export default function Rooms({
             checkin_date={rooms.checkin_date}
             checkout_date={rooms.checkout_date}
             days_of_stay={rooms.days_of_stay}
+            guestNumber={guestNumber}
             totalRooms={totalRooms}
             totalPrice={totalPrice}
             handleReserve={handleReserve}

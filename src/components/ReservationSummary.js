@@ -5,6 +5,7 @@ export default function ReservationSummary({
   checkin_date,
   checkout_date,
   days_of_stay,
+  guestNumber,
   totalRooms,
   totalPrice,
   handleReserve,
@@ -60,7 +61,9 @@ export default function ReservationSummary({
         <Typography variant="body1" component="p" fontWeight={600} mt={2}>
           {`${totalRooms} ${
             totalRooms === 1 ? "Room" : "Rooms"
-          } - ${days_of_stay} ${days_of_stay === 1 ? "Night" : "Nights"}`}
+          } - ${days_of_stay} ${
+            days_of_stay === 1 ? "Night" : "Nights"
+          } - ${guestNumber} Guests`}
         </Typography>
 
         <Typography
