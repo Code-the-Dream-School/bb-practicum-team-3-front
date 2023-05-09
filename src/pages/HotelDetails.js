@@ -18,6 +18,7 @@ import Error from "../components/Error";
 import fetchHotelDetails from "../api/fetchHotelDetails";
 import fetchRooms from "../api/fetchRooms";
 import fetchUserToken from "../api/fetchUserToken";
+import fetchCreateReservation from "../api/fetchCreateReservation";
 
 export default function HotelDetails() {
   const location = useLocation();
@@ -29,6 +30,10 @@ export default function HotelDetails() {
   const [guestRating, setGuestRating] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [rooms, setRooms] = useState(null);
+
+  const [totalRooms, setTotalRooms] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [roomTotalPriceAndRoomNum, setRoomTotalPriceAndRoomNum] = useState([]);
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
@@ -74,9 +79,56 @@ export default function HotelDetails() {
     });
   }, [location.search]);
 
-  const handleReserve = () => {
+  useEffect(() => {
+    const totalRooms = roomTotalPriceAndRoomNum.reduce(
+      (total, room) => total + room.num_of_rooms,
+      0
+    );
+    setTotalRooms(totalRooms);
+
+    const totalPrice = roomTotalPriceAndRoomNum.reduce(
+      (total, room) => total + room.price * room.num_of_rooms,
+      0
+    );
+    setTotalPrice(totalPrice);
+  }, [roomTotalPriceAndRoomNum]);
+
+  const handleSelectedRooms = (id, price, num_of_rooms) => {
+    const roomIndex = roomTotalPriceAndRoomNum.findIndex(
+      (room) => room.id === id
+    );
+
+    if (roomIndex !== -1) {
+      const updatedRooms = roomTotalPriceAndRoomNum.map((room) =>
+        room.id === id ? { ...room, num_of_rooms } : room
+      );
+
+      setRoomTotalPriceAndRoomNum(updatedRooms);
+    } else {
+      const room = { id, price, num_of_rooms };
+      setRoomTotalPriceAndRoomNum([...roomTotalPriceAndRoomNum, room]);
+    }
+  };
+
+  const handleReserve = async () => {
+    const reservationDetails = {
+      checkin: rooms.checkin_date,
+      checkout: rooms.checkout_date,
+      total_days: rooms.days_of_stay,
+      total_guests: rooms.guestNumber,
+      total_rooms: totalRooms,
+      total_price: totalPrice.toFixed(2),
+      address: hotelData.address + ", " + hotelData.city + ", " + hotelData.zip,
+      date_received: new Date().toISOString().slice(0, 10),
+    };
+
     if (isUserLoggedIn) {
-      console.log("send reservation to db");
+      console.log(reservationDetails);
+      await fetchCreateReservation(reservationDetails).then((returnMessage) => {
+        if (returnMessage.data) {
+          navigate(`/profile/reservations/${returnMessage.data._id}`);
+        }
+      });
     } else {
       // If user is not authenticated, redirect to signin page with redirect prop
       const currentUrlWithSearchParams = `${window.location.pathname}${window.location.search}`;
@@ -181,6 +233,10 @@ export default function HotelDetails() {
             <Rooms
               rooms={rooms}
               hotelId={hotelData.hotel_id}
+              totalRooms={totalRooms}
+              totalPrice={totalPrice}
+              guestNumber={rooms.guestNumber}
+              handleSelectedRooms={handleSelectedRooms}
               handleReserve={handleReserve}
             />
 

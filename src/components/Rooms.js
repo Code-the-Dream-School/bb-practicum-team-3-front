@@ -1,47 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import RoomCard from "../components/RoomCard";
 import ReservationSummary from "../components/ReservationSummary";
 import RoomSearchForm from "../components/RoomSearchForm";
 
-export default function Rooms({ rooms, hotelId, handleReserve }) {
+export default function Rooms({
+  rooms,
+  hotelId,
+  totalRooms,
+  totalPrice,
+  guestNumber,
+  handleSelectedRooms,
+  handleReserve,
+}) {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-
-  const [totalRooms, setTotalRooms] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [roomTotalPriceAndRoomNum, setRoomTotalPriceAndRoomNum] = useState([]);
-
-  useEffect(() => {
-    const totalRooms = roomTotalPriceAndRoomNum.reduce(
-      (total, room) => total + room.num_of_rooms,
-      0
-    );
-    setTotalRooms(totalRooms);
-
-    const totalPrice = roomTotalPriceAndRoomNum.reduce(
-      (total, room) => total + room.price * room.num_of_rooms,
-      0
-    );
-    setTotalPrice(totalPrice);
-  }, [roomTotalPriceAndRoomNum]);
-
-  const handleSelectedRooms = (id, price, num_of_rooms) => {
-    const roomIndex = roomTotalPriceAndRoomNum.findIndex(
-      (room) => room.id === id
-    );
-
-    if (roomIndex !== -1) {
-      const updatedRooms = roomTotalPriceAndRoomNum.map((room) =>
-        room.id === id ? { ...room, num_of_rooms } : room
-      );
-
-      setRoomTotalPriceAndRoomNum(updatedRooms);
-    } else {
-      const room = { id, price, num_of_rooms };
-      setRoomTotalPriceAndRoomNum([...roomTotalPriceAndRoomNum, room]);
-    }
-  };
 
   return (
     <>
@@ -71,7 +44,7 @@ export default function Rooms({ rooms, hotelId, handleReserve }) {
         }}
       >
         <Box sx={{ gridArea: "updateForm" }}>
-          <RoomSearchForm hotelId={hotelId} />
+          <RoomSearchForm hotelId={hotelId} guests={guestNumber} />
         </Box>
         <Box sx={{ gridArea: "roomCard" }}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
