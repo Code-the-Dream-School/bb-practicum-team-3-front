@@ -19,7 +19,7 @@ export default function PopularDestinationGrid() {
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Link
               component={ReactRouterLink}
-              to={`/searchresults?destination=${image.title}&guestNumber=1&roomNumber=2&checkinDate=null&checkoutDate=null`}
+              to={`/searchresults?destination=${image.title}&guestNumber=2&roomNumber=1&checkinDate=null&checkoutDate=null`}
             >
               <Box
                 sx={{
