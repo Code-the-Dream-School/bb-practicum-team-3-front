@@ -54,6 +54,7 @@ export default function Rooms({
                   key={index}
                   id={index}
                   room={room}
+                  guestNumber={guestNumber}
                   daysOfStay={rooms.days_of_stay}
                   handleSelectedRooms={handleSelectedRooms}
                 />
