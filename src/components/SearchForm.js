@@ -45,7 +45,9 @@ export default function SearchForm() {
     const formattedCheckoutDate =
       checkoutDate !== null ? checkoutDate.format("YYYY-MM-DD") : null;
 
-    const queryString = `?destination=${destination}&guestNumber=${guestNumber}&roomNumber=${roomNumber}&checkinDate=${formattedCheckinDate}&checkoutDate=${formattedCheckoutDate}`;
+    const formattedDesination = destination.toLowerCase();
+
+    const queryString = `?destination=${formattedDesination}&guestNumber=${guestNumber}&roomNumber=${roomNumber}&checkinDate=${formattedCheckinDate}&checkoutDate=${formattedCheckoutDate}`;
     navigate(`/searchresults${queryString}`);
   };
 
